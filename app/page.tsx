@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Hero from "../components/Hero";
 import Intro from "../components/Intro";
 import Advantages from "../components/Advantages";
@@ -8,8 +11,11 @@ import Location from "../components/Location";
 import Lifestyle from "../components/Lifestyle";
 import PurchaseMethods from "../components/PurchaseMethods";
 import Footer from "../components/Footer";
+import LeadModal from "../components/LeadModal";
 
 export default function HomePage() {
+  const [isLeadOpen, setIsLeadOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-[#f5f3ee] text-[#1f1f1a]">
       <Hero />
@@ -22,6 +28,19 @@ export default function HomePage() {
       <Lifestyle />
       <PurchaseMethods />
       <Footer />
+
+      <button
+        type="button"
+        onClick={() => setIsLeadOpen(true)}
+        className="fixed bottom-5 right-5 z-50 h-[52px] bg-[#1f1f1a] px-5 text-[12px] font-semibold uppercase text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)] transition hover:opacity-90"
+      >
+        Оставить заявку
+      </button>
+
+      <LeadModal
+        isOpen={isLeadOpen}
+        onClose={() => setIsLeadOpen(false)}
+      />
     </main>
   );
 }
