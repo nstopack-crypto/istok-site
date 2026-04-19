@@ -7,6 +7,7 @@ type GalleryItem = {
   title: string;
   countLabel: string;
   preview: string;
+  cardHeight?: number;
   images: string[];
 };
 
@@ -30,6 +31,7 @@ const galleries: GalleryItem[] = [
     title: "Коворкинг и конференц-зал",
     countLabel: "8 фото",
     preview: "/images/infra-coworking-cover.jpg",
+    cardHeight: 468,
     images: [
       "/images/infra-coworking-1.jpg",
       "/images/infra-coworking-2.jpg",
@@ -153,6 +155,26 @@ function ArrowLeftCircle() {
   );
 }
 
+function ArrowRightCircle() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M5 12H19"
+        stroke="#1F1F1A"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M13 6L19 12L13 18"
+        stroke="#1F1F1A"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function CloseIcon() {
   return (
     <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -178,6 +200,11 @@ export default function Infrastructure() {
   );
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
+
+  const [cursorVisible, setCursorVisible] = useState(false);
+  const [cursorX, setCursorX] = useState(0);
+  const [cursorY, setCursorY] = useState(0);
+  const [isLeftSide, setIsLeftSide] = useState(true);
 
   const cardsPerView = 3;
   const maxSlideIndex = Math.max(0, galleries.length - cardsPerView);
@@ -231,22 +258,42 @@ export default function Infrastructure() {
     Math.min(slideIndex + cardsPerView, galleries.length),
   ).padStart(2, "0");
 
+  const handlePopupMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setCursorX(x);
+    setCursorY(y);
+    setIsLeftSide(x < rect.width / 2);
+  };
+
+  const handlePopupClick = () => {
+    if (!activeGallery) return;
+
+    if (isLeftSide) {
+      showPrevImage();
+    } else {
+      showNextImage();
+    }
+  };
+
   return (
     <>
-      <section className="bg-[#f5f3ee] py-[20px] md:py-[24px]">
+      <section className="bg-[#f5f3ee] py-[20px]">
         <div className="w-full px-[20px]">
-          <div className="mb-[150px] md:mb-[190px]">
+          <div className="mb-[150px] md:mb-[188px]">
             <h2 className="max-w-[980px] text-[54px] font-medium leading-[0.92] tracking-[-0.06em] text-[#1f1f1a] md:text-[88px]">
               Клубная инфраструктура
             </h2>
 
-            <p className="mt-[22px] max-w-[360px] text-[16px] font-medium leading-[1.25] tracking-[-0.02em] text-[#1f1f1a] md:text-[18px]">
+            <p className="mt-[18px] max-w-[355px] text-[16px] font-medium leading-[1.2] tracking-[-0.02em] text-[#1f1f1a] md:text-[18px]">
               Каждая деталь создана для удобства резидентов, а их желания уже
               предугаданы.
             </p>
           </div>
 
-          <div className="mb-[28px] flex items-center justify-between">
+          <div className="mb-[24px] flex items-center justify-between">
             <p className="text-[18px] leading-none text-[#8A8A8A]">
               {currentFrom} — {currentTo}
             </p>
@@ -273,9 +320,10 @@ export default function Infrastructure() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-x-[20px] gap-y-[32px] md:grid-cols-[1fr_1fr_1fr]">
+          <div className="grid grid-cols-1 items-start gap-x-[20px] gap-y-[32px] md:grid-cols-[384px_1fr_384px]">
             {visibleCards.map((gallery) => {
               const realIndex = galleries.findIndex((g) => g.title === gallery.title);
+              const isTall = gallery.title === "Коворкинг и конференц-зал";
 
               return (
                 <article key={gallery.title}>
@@ -284,7 +332,11 @@ export default function Infrastructure() {
                     onClick={() => openGallery(realIndex)}
                     className="group block w-full text-left"
                   >
-                    <div className="relative mb-[14px] aspect-[506/373] w-full overflow-hidden bg-[#e8e3dc]">
+                    <div
+                      className={`relative mb-[14px] w-full overflow-hidden bg-[#e8e3dc] ${
+                        isTall ? "h-[468px]" : "h-[373px]"
+                      }`}
+                    >
                       <Image
                         src={gallery.preview}
                         alt={gallery.title}
@@ -299,7 +351,7 @@ export default function Infrastructure() {
                         <h3 className="text-[18px] font-medium leading-[1.18] tracking-[-0.02em] text-[#1f1f1a]">
                           {gallery.title}
                         </h3>
-                        <p className="mt-[4px] text-[18px] leading-[1.18] text-[#8A8A8A]">
+                        <p className="mt-[2px] text-[18px] leading-[1.18] text-[#8A8A8A]">
                           {gallery.countLabel}
                         </p>
                       </div>
@@ -314,8 +366,8 @@ export default function Infrastructure() {
             })}
           </div>
 
-          <div className="ml-auto mt-[140px] max-w-[1080px] md:mt-[170px]">
-            <p className="max-w-[1080px] text-[34px] font-medium leading-[1.02] tracking-[-0.05em] text-[#1f1f1a] md:text-[62px]">
+          <div className="ml-auto mt-[156px] max-w-[785px]">
+            <p className="max-w-[785px] text-[40px] font-medium leading-[1.04] tracking-[-0.05em] text-[#1f1f1a]">
               Здесь архитектура не спорит с природой, а становится её частью.
               Невысокие дома, спокойные цвета фасадов, зелёные дворы, маршруты
               для прогулок и места для отдыха — всё продумано так, чтобы жизнь
@@ -324,7 +376,7 @@ export default function Infrastructure() {
 
             <a
               href="#"
-              className="mt-[30px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
+              className="mt-[34px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
             >
               3D-тур по лобби
             </a>
@@ -334,16 +386,25 @@ export default function Infrastructure() {
 
       {activeGallery && activeImage && (
         <div className="fixed inset-0 z-[100] bg-[#f5f3ee]">
-          <div className="h-full overflow-auto px-[20px] py-[20px]">
+          <div
+            className="relative h-full overflow-auto px-[20px] py-[20px] cursor-none"
+            onMouseMove={handlePopupMouseMove}
+            onMouseEnter={() => setCursorVisible(true)}
+            onMouseLeave={() => setCursorVisible(false)}
+            onClick={handlePopupClick}
+          >
             <div className="w-full">
-              <div className="mb-[20px] flex items-start justify-between gap-[20px]">
+              <div className="mb-[18px] flex items-start justify-between gap-[20px]">
                 <h3 className="max-w-[220px] text-[22px] font-medium leading-[1.08] tracking-[-0.03em] text-[#1f1f1a] md:text-[28px]">
                   {activeGallery.title}
                 </h3>
 
                 <button
                   type="button"
-                  onClick={closeGallery}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeGallery();
+                  }}
                   className="transition hover:opacity-60"
                   aria-label="Закрыть"
                 >
@@ -351,8 +412,11 @@ export default function Infrastructure() {
                 </button>
               </div>
 
-              <div className="mb-[28px] flex justify-center">
-                <div className="relative aspect-[640/720] w-full max-w-[640px] overflow-hidden bg-[#ebe6df] md:max-w-[760px]">
+              <div className="mb-[24px] flex justify-center">
+                <div
+                  className="relative aspect-[640/720] w-full max-w-[640px] overflow-hidden bg-[#ebe6df] md:max-w-[760px]"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Image
                     src={activeImage}
                     alt={activeGallery.title}
@@ -363,7 +427,10 @@ export default function Infrastructure() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-[14px] overflow-x-auto pb-[6px]">
+              <div
+                className="flex items-center gap-[14px] overflow-x-auto pb-[6px]"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   type="button"
                   onClick={showPrevImage}
@@ -395,6 +462,18 @@ export default function Infrastructure() {
                 ))}
               </div>
             </div>
+
+            {cursorVisible && (
+              <div
+                className="pointer-events-none absolute z-[110] hidden h-[82px] w-[82px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d6d6d6] bg-[#f5f3ee] md:flex"
+                style={{
+                  left: cursorX,
+                  top: cursorY,
+                }}
+              >
+                {isLeftSide ? <ArrowLeftCircle /> : <ArrowRightCircle />}
+              </div>
+            )}
           </div>
         </div>
       )}
