@@ -27,6 +27,9 @@ const slides = [
 export default function Landscaping() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLeftSide, setIsLeftSide] = useState(true);
+  const [cursorVisible, setCursorVisible] = useState(false);
+  const [cursorX, setCursorX] = useState(0);
+  const [cursorY, setCursorY] = useState(0);
 
   const activeSlide = slides[activeIndex];
 
@@ -41,6 +44,10 @@ export default function Landscaping() {
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setCursorX(x);
+    setCursorY(y);
     setIsLeftSide(x < rect.width / 2);
   };
 
@@ -54,8 +61,10 @@ export default function Landscaping() {
 
   return (
     <section
-      className="relative h-screen min-h-[732px] w-full overflow-hidden bg-[#efebe4]"
+      className="relative h-screen min-h-[732px] w-full overflow-hidden bg-[#efebe4] cursor-none"
       onMouseMove={handleMouseMove}
+      onMouseEnter={() => setCursorVisible(true)}
+      onMouseLeave={() => setCursorVisible(false)}
       onClick={handleClick}
     >
       <div className="absolute inset-0">
@@ -65,52 +74,80 @@ export default function Landscaping() {
           fill
           sizes="100vw"
           className="object-cover transition-opacity duration-500"
-          priority={false}
         />
       </div>
 
       <div className="absolute inset-0 bg-[rgba(0,0,0,0.18)]" />
 
       <div className="relative z-10 h-full w-full px-[20px]">
-        <div className="h-full w-full">
-          <div className="flex h-full flex-col justify-between py-[20px]">
-            <h2 className="max-w-[1050px] text-[48px] font-medium leading-[0.95] tracking-[-0.04em] text-white md:text-[76px]">
-              Благоустройство и озеленение
-            </h2>
+        <h2 className="pt-[20px] text-[48px] font-medium leading-[0.95] tracking-[-0.04em] text-white md:max-w-[1050px] md:text-[76px]">
+          Благоустройство и озеленение
+        </h2>
 
-            <div className="flex items-center justify-between pb-[36px]">
-              <div className="flex-1">
-                <button
-                  type="button"
-                  aria-label={isLeftSide ? "Предыдущий слайд" : "Следующий слайд"}
-                  className="flex h-[82px] w-[82px] items-center justify-center rounded-full border border-white text-[34px] text-white transition hover:bg-white/10"
-                >
-                  {isLeftSide ? "←" : "→"}
-                </button>
-              </div>
+        {/* Desktop card with fixed size and position */}
+        <div
+          className="absolute hidden overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px] md:block"
+          style={{
+            width: 507,
+            height: 350,
+            left: 1075,
+            top: 170,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="h-full p-5">
+            <div className="mb-8 flex items-start justify-between gap-6">
+              <p className="text-[18px] font-medium leading-none text-white">
+                {activeSlide.counter}
+              </p>
 
-              <div
-                className="w-full max-w-[508px] overflow-hidden bg-[rgba(223,223,223,0.28)] p-5 backdrop-blur-[24px] md:p-6"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="mb-8 flex items-start justify-between gap-6">
-                  <p className="text-[18px] font-medium leading-none text-white">
-                    {activeSlide.counter}
-                  </p>
+              <p className="max-w-[248px] text-[16px] font-medium leading-[1.35] tracking-[-0.02em] text-white">
+                {activeSlide.text}
+              </p>
+            </div>
 
-                  <p className="max-w-[248px] text-[16px] font-medium leading-[1.35] tracking-[-0.02em] text-white">
-                    {activeSlide.text}
-                  </p>
-                </div>
-
-                <h3 className="max-w-[360px] text-[40px] font-medium leading-[0.98] tracking-[-0.03em] text-white md:text-[52px]">
-                  {activeSlide.title}
-                </h3>
-              </div>
+            <div className="flex h-[calc(100%-64px)] items-end">
+              <h3 className="max-w-[360px] text-[40px] font-medium leading-[0.98] tracking-[-0.03em] text-white md:text-[52px]">
+                {activeSlide.title}
+              </h3>
             </div>
           </div>
         </div>
+
+        {/* Mobile card */}
+        <div className="absolute bottom-[36px] left-[20px] right-[20px] md:hidden">
+          <div
+            className="overflow-hidden bg-[rgba(223,223,223,0.28)] p-5 backdrop-blur-[24px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-8 flex items-start justify-between gap-6">
+              <p className="text-[18px] font-medium leading-none text-white">
+                {activeSlide.counter}
+              </p>
+
+              <p className="max-w-[248px] text-[16px] font-medium leading-[1.35] tracking-[-0.02em] text-white">
+                {activeSlide.text}
+              </p>
+            </div>
+
+            <h3 className="max-w-[360px] text-[40px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
+              {activeSlide.title}
+            </h3>
+          </div>
+        </div>
       </div>
+
+      {cursorVisible && (
+        <div
+          className="pointer-events-none absolute z-20 hidden h-[82px] w-[82px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white text-[34px] text-white md:flex"
+          style={{
+            left: cursorX,
+            top: cursorY,
+          }}
+        >
+          {isLeftSide ? "←" : "→"}
+        </div>
+      )}
     </section>
   );
 }
