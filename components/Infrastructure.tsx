@@ -16,6 +16,7 @@ const galleries: GalleryItem[] = [
     title: "Комната для йоги и танцев",
     countLabel: "8 фото",
     preview: "/images/infra-yoga-cover.jpg",
+    cardHeight: 373,
     images: [
       "/images/infra-yoga-1.jpg",
       "/images/infra-yoga-2.jpg",
@@ -31,7 +32,7 @@ const galleries: GalleryItem[] = [
     title: "Коворкинг и конференц-зал",
     countLabel: "8 фото",
     preview: "/images/infra-coworking-cover.jpg",
-    cardHeight: 468,
+    cardHeight: 500,
     images: [
       "/images/infra-coworking-1.jpg",
       "/images/infra-coworking-2.jpg",
@@ -47,6 +48,7 @@ const galleries: GalleryItem[] = [
     title: "Комната матери и ребенка",
     countLabel: "8 фото",
     preview: "/images/infra-mother-cover.jpg",
+    cardHeight: 373,
     images: [
       "/images/infra-mother-1.jpg",
       "/images/infra-mother-2.jpg",
@@ -62,6 +64,7 @@ const galleries: GalleryItem[] = [
     title: "Лобби и гостевая зона",
     countLabel: "8 фото",
     preview: "/images/infra-lobby-cover.jpg",
+    cardHeight: 373,
     images: [
       "/images/infra-lobby-1.jpg",
       "/images/infra-lobby-2.jpg",
@@ -280,9 +283,9 @@ export default function Infrastructure() {
 
   return (
     <>
-      <section className="bg-[#f5f3ee] py-[20px]">
+      <section className="bg-[#f5f3ee] pt-[20px]">
         <div className="w-full px-[20px]">
-          <div className="mb-[150px] md:mb-[188px]">
+          <div className="mb-[190px]">
             <h2 className="max-w-[980px] text-[54px] font-medium leading-[0.92] tracking-[-0.06em] text-[#1f1f1a] md:text-[88px]">
               Клубная инфраструктура
             </h2>
@@ -320,10 +323,9 @@ export default function Infrastructure() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 items-start gap-x-[20px] gap-y-[32px] md:grid-cols-[384px_1fr_384px]">
+          <div className="grid grid-cols-1 items-start gap-x-[20px] gap-y-[32px] md:grid-cols-[1fr_1fr_1fr]">
             {visibleCards.map((gallery) => {
               const realIndex = galleries.findIndex((g) => g.title === gallery.title);
-              const isTall = gallery.title === "Коворкинг и конференц-зал";
 
               return (
                 <article key={gallery.title}>
@@ -333,9 +335,8 @@ export default function Infrastructure() {
                     className="group block w-full text-left"
                   >
                     <div
-                      className={`relative mb-[14px] w-full overflow-hidden bg-[#e8e3dc] ${
-                        isTall ? "h-[468px]" : "h-[373px]"
-                      }`}
+                      className="relative mb-[14px] w-full overflow-hidden bg-[#e8e3dc]"
+                      style={{ height: gallery.cardHeight ?? 373 }}
                     >
                       <Image
                         src={gallery.preview}
@@ -366,20 +367,22 @@ export default function Infrastructure() {
             })}
           </div>
 
-          <div className="ml-auto mt-[156px] max-w-[785px]">
-            <p className="max-w-[785px] text-[40px] font-medium leading-[1.04] tracking-[-0.05em] text-[#1f1f1a]">
-              Здесь архитектура не спорит с природой, а становится её частью.
-              Невысокие дома, спокойные цвета фасадов, зелёные дворы, маршруты
-              для прогулок и места для отдыха — всё продумано так, чтобы жизнь
-              текла спокойно и естественно.
-            </p>
+          <div className="relative mt-[160px] h-[291px]">
+            <div className="absolute left-[546px] top-0 w-[1034px]">
+              <p className="text-[40px] font-medium leading-[1.04] tracking-[-0.05em] text-[#1f1f1a]">
+                Здесь архитектура не спорит с природой, а становится её частью.
+                Невысокие дома, спокойные цвета фасадов, зелёные дворы, маршруты
+                для прогулок и места для отдыха — всё продумано так, чтобы жизнь
+                текла спокойно и естественно.
+              </p>
 
-            <a
-              href="#"
-              className="mt-[34px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
-            >
-              3D-тур по лобби
-            </a>
+              <a
+                href="#"
+                className="mt-[40px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
+              >
+                3D-тур по лобби
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -405,7 +408,7 @@ export default function Infrastructure() {
                     e.stopPropagation();
                     closeGallery();
                   }}
-                  className="transition hover:opacity-60"
+                  className="relative z-[120] -mr-[8px] -mt-[8px] flex h-[44px] w-[44px] items-center justify-center transition hover:opacity-60"
                   aria-label="Закрыть"
                 >
                   <CloseIcon />
