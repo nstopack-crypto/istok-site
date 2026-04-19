@@ -20,7 +20,7 @@ export default function HomePage() {
   const [isLeadOpen, setIsLeadOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#f5f3ee] text-[#1f1f1a]">
+    <main id="top" className="min-h-screen bg-[#f5f3ee] text-[#1f1f1a]">
       <Hero />
       <Intro />
       <Advantages />
