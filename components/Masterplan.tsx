@@ -133,8 +133,8 @@ function ArrowIcon() {
 
 export default function Masterplan() {
   const [activeTab, setActiveTab] = useState<TabType>("all");
-  const [hoveredHouse, setHoveredHouse] = useState<House | null>(houses[0]);
-  const [isCardVisible, setIsCardVisible] = useState(true);
+  const [hoveredHouse, setHoveredHouse] = useState<House | null>(null);
+  const [isCardVisible, setIsCardVisible] = useState(false);
 
   const visibleHouses = useMemo(() => {
     return activeTab === "amenities" ? [] : houses;
@@ -158,30 +158,39 @@ export default function Masterplan() {
 
     const blockWidth = 1600;
     const blockHeight = 730;
+    const markerSize = 44;
     const cardWidth = 375;
     const cardHeight = 500;
-    const offsetX = 52;
+    const offset = 16;
     const padding = 20;
 
     const houseX = (leftNum / 100) * blockWidth;
     const houseY = (topNum / 100) * blockHeight;
 
-    const canOpenRight = houseX + offsetX + cardWidth <= blockWidth - padding;
-    const canOpenLeft = houseX - offsetX - cardWidth >= padding;
+    const canOpenRight =
+      houseX + markerSize / 2 + offset + cardWidth <= blockWidth - padding;
+    const canOpenLeft =
+      houseX - markerSize / 2 - offset - cardWidth >= padding;
 
-    let leftPx = houseX + offsetX;
+    let leftPx = houseX + markerSize / 2 + offset;
     let transformOrigin = "left center";
 
     if (!canOpenRight && canOpenLeft) {
-      leftPx = houseX - cardWidth - offsetX;
+      leftPx = houseX - markerSize / 2 - offset - cardWidth;
       transformOrigin = "right center";
     } else if (!canOpenRight && !canOpenLeft) {
-      leftPx = Math.max(padding, Math.min(blockWidth - cardWidth - padding, houseX - cardWidth / 2));
+      leftPx = Math.max(
+        padding,
+        Math.min(blockWidth - cardWidth - padding, houseX - cardWidth / 2),
+      );
       transformOrigin = "center center";
     }
 
-    const rawTop = houseY - cardHeight / 2 + 22;
-    const safeTop = Math.max(padding, Math.min(blockHeight - cardHeight - padding, rawTop));
+    const rawTop = houseY - cardHeight / 2 + markerSize / 2;
+    const safeTop = Math.max(
+      padding,
+      Math.min(blockHeight - cardHeight - padding, rawTop),
+    );
 
     return {
       left: `${leftPx}px`,
@@ -262,10 +271,10 @@ export default function Masterplan() {
               onMouseEnter={() => {
                 setHoveredHouse(house);
                 setIsCardVisible(false);
-
-                window.setTimeout(() => {
-                  setIsCardVisible(true);
-                }, 20);
+                window.setTimeout(() => setIsCardVisible(true), 20);
+              }}
+              onMouseLeave={() => {
+                setIsCardVisible(false);
               }}
               className={`absolute z-10 flex h-[44px] w-[44px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[13px] font-medium shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all duration-200 active:scale-[0.95] ${
                 isActive
@@ -291,10 +300,10 @@ export default function Masterplan() {
 
         {hoveredHouse && activeTab !== "amenities" && (
           <div
-            className={`absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px] transition-all duration-300 ease-out ${
+            className={`pointer-events-none absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px] transition-all duration-300 ease-out ${
               isCardVisible
                 ? "opacity-100 scale-100"
-                : "pointer-events-none opacity-0 scale-[0.96]"
+                : "opacity-0 scale-[0.96]"
             }`}
             style={{
               left: cardPosition.left,
@@ -334,7 +343,7 @@ export default function Masterplan() {
 
                 <button
                   type="button"
-                  className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white transition hover:scale-105"
+                  className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white"
                 >
                   <ArrowIcon />
                 </button>
