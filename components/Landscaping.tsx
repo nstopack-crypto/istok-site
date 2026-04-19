@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const slides = [
   {
@@ -27,12 +27,11 @@ const slides = [
 export default function Landscaping() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0);
-  const [contentVisible, setContentVisible] = useState(true);
   const [isLeftSide, setIsLeftSide] = useState(true);
   const [cursorVisible, setCursorVisible] = useState(false);
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isFading, setIsFading] = useState(false);
 
   const activeSlide = slides[displayIndex];
 
@@ -42,10 +41,6 @@ export default function Landscaping() {
 
   const prevIndex = useMemo(() => {
     return (activeIndex - 1 + slides.length) % slides.length;
-  }, [activeIndex]);
-
-  useEffect(() => {
-    setDisplayIndex(activeIndex);
   }, [activeIndex]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -59,20 +54,18 @@ export default function Landscaping() {
   };
 
   const animateTo = (targetIndex: number) => {
-    if (isAnimating) return;
+    if (isFading) return;
 
-    setIsAnimating(true);
-    setContentVisible(false);
+    setIsFading(true);
 
     window.setTimeout(() => {
       setActiveIndex(targetIndex);
       setDisplayIndex(targetIndex);
-      setContentVisible(true);
 
       window.setTimeout(() => {
-        setIsAnimating(false);
+        setIsFading(false);
       }, 450);
-    }, 220);
+    }, 250);
   };
 
   const handleClick = () => {
@@ -85,7 +78,7 @@ export default function Landscaping() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#efebe4] cursor-none"
+      className="relative w-full overflow-hidden bg-[#111111] cursor-none"
       style={{ height: 750 }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setCursorVisible(true)}
@@ -94,12 +87,8 @@ export default function Landscaping() {
     >
       <div className="absolute inset-0">
         <div
-          className={`absolute inset-0 transition-all duration-500 ease-out ${
-            contentVisible
-              ? "translate-x-0 opacity-100"
-              : isLeftSide
-                ? "translate-x-[24px] opacity-0"
-                : "-translate-x-[24px] opacity-0"
+          className={`absolute inset-0 transition-opacity duration-[700ms] ease-out ${
+            isFading ? "opacity-0" : "opacity-100"
           }`}
         >
           <Image
@@ -112,20 +101,16 @@ export default function Landscaping() {
         </div>
       </div>
 
-      <div className="absolute inset-0 bg-[rgba(0,0,0,0.18)]" />
+      <div className="absolute inset-0 bg-[rgba(0,0,0,0.34)]" />
 
       <div className="relative z-10 h-full w-full px-[20px]">
-        <h2 className="pt-[20px] max-w-[1100px] text-[48px] font-medium leading-[0.95] tracking-[-0.04em] text-white md:text-[76px]">
+        <h2 className="max-w-[980px] pt-[20px] text-[44px] font-medium leading-[0.94] tracking-[-0.045em] text-white md:text-[72px]">
           Благоустройство и озеленение
         </h2>
 
         <div
-          className={`absolute hidden overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px] transition-all duration-500 ease-out md:block ${
-            contentVisible
-              ? "translate-x-0 opacity-100"
-              : isLeftSide
-                ? "translate-x-[32px] opacity-0"
-                : "-translate-x-[32px] opacity-0"
+          className={`absolute hidden overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[24px] transition-opacity duration-[700ms] ease-out md:block ${
+            isFading ? "opacity-0" : "opacity-100"
           }`}
           style={{
             width: 507,
@@ -135,19 +120,19 @@ export default function Landscaping() {
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="h-full p-5">
+          <div className="flex h-full flex-col p-5">
             <div className="mb-8 flex items-start justify-between gap-6">
               <p className="text-[18px] font-medium leading-none text-white">
                 {activeSlide.counter}
               </p>
 
-              <p className="max-w-[248px] text-[16px] font-medium leading-[1.35] tracking-[-0.02em] text-white">
+              <p className="max-w-[248px] text-[15px] font-medium leading-[1.45] tracking-[-0.02em] text-white">
                 {activeSlide.text}
               </p>
             </div>
 
-            <div className="flex h-[calc(100%-64px)] items-end">
-              <h3 className="max-w-[360px] text-[40px] font-medium leading-[0.98] tracking-[-0.03em] text-white md:text-[52px]">
+            <div className="mt-auto">
+              <h3 className="max-w-[360px] text-[34px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
                 {activeSlide.title}
               </h3>
             </div>
@@ -155,16 +140,12 @@ export default function Landscaping() {
         </div>
 
         <div
-          className={`absolute bottom-[36px] left-[20px] right-[20px] transition-all duration-500 ease-out md:hidden ${
-            contentVisible
-              ? "translate-x-0 opacity-100"
-              : isLeftSide
-                ? "translate-x-[20px] opacity-0"
-                : "-translate-x-[20px] opacity-0"
+          className={`absolute bottom-[36px] left-[20px] right-[20px] transition-opacity duration-[700ms] ease-out md:hidden ${
+            isFading ? "opacity-0" : "opacity-100"
           }`}
         >
           <div
-            className="overflow-hidden bg-[rgba(223,223,223,0.28)] p-5 backdrop-blur-[24px]"
+            className="overflow-hidden bg-[rgba(223,223,223,0.22)] p-5 backdrop-blur-[24px]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-8 flex items-start justify-between gap-6">
@@ -172,12 +153,12 @@ export default function Landscaping() {
                 {activeSlide.counter}
               </p>
 
-              <p className="max-w-[248px] text-[16px] font-medium leading-[1.35] tracking-[-0.02em] text-white">
+              <p className="max-w-[248px] text-[15px] font-medium leading-[1.45] tracking-[-0.02em] text-white">
                 {activeSlide.text}
               </p>
             </div>
 
-            <h3 className="max-w-[360px] text-[40px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
+            <h3 className="max-w-[360px] text-[34px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
               {activeSlide.title}
             </h3>
           </div>
