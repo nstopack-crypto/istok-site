@@ -76,47 +76,47 @@ function AmenityIcon({ type }: { type: Amenity["icon"] }) {
     case "cafe":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M3 7h8v3.5A3.5 3.5 0 0 1 7.5 14h-1A3.5 3.5 0 0 1 3 10.5V7Z" stroke="white" strokeWidth="1.5"/>
-          <path d="M11 8h1.5A2.5 2.5 0 0 1 12.5 13H11" stroke="white" strokeWidth="1.5"/>
+          <path d="M3 7h8v3.5A3.5 3.5 0 0 1 7.5 14h-1A3.5 3.5 0 0 1 3 10.5V7Z" stroke="white" strokeWidth="1.5" />
+          <path d="M11 8h1.5A2.5 2.5 0 0 1 12.5 13H11" stroke="white" strokeWidth="1.5" />
         </svg>
       );
     case "shop":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M3 6h12l-1 7H4L3 6Z" stroke="white" strokeWidth="1.5"/>
-          <path d="M6 6V4h6v2" stroke="white" strokeWidth="1.5"/>
+          <path d="M3 6h12l-1 7H4L3 6Z" stroke="white" strokeWidth="1.5" />
+          <path d="M6 6V4h6v2" stroke="white" strokeWidth="1.5" />
         </svg>
       );
     case "walk":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <circle cx="9" cy="4" r="2" fill="white"/>
-          <path d="M7.5 14L9 10l2.5 2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M8 7l2-1 1.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="9" cy="4" r="2" fill="white" />
+          <path d="M7.5 14L9 10l2.5 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M8 7l2-1 1.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
     case "work":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <rect x="3" y="4" width="12" height="8" rx="1" stroke="white" strokeWidth="1.5"/>
-          <path d="M7 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+          <rect x="3" y="4" width="12" height="8" rx="1" stroke="white" strokeWidth="1.5" />
+          <path d="M7 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
     case "kids":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <circle cx="6" cy="7" r="2" fill="white"/>
-          <circle cx="12" cy="7" r="2" fill="white"/>
-          <path d="M3.5 13c.8-1.7 2-2.5 3.5-2.5S9.7 11.3 10.5 13" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M7.5 13c.8-1.7 2-2.5 3.5-2.5s2.7.8 3.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="6" cy="7" r="2" fill="white" />
+          <circle cx="12" cy="7" r="2" fill="white" />
+          <path d="M3.5 13c.8-1.7 2-2.5 3.5-2.5S9.7 11.3 10.5 13" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M7.5 13c.8-1.7 2-2.5 3.5-2.5s2.7.8 3.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
     case "sport":
       return (
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M6 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" stroke="white" strokeWidth="1.5"/>
-          <path d="M8.2 8.3 14 14" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M4.2 10.5 3 14" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+          <path d="M6 4.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" stroke="white" strokeWidth="1.5" />
+          <path d="M8.2 8.3 14 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M4.2 10.5 3 14" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
   }
@@ -125,19 +125,8 @@ function AmenityIcon({ type }: { type: Amenity["icon"] }) {
 function ArrowIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M5 12H19"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M13 6L19 12L13 18"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M5 12H19" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M13 6L19 12L13 18" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -145,6 +134,7 @@ function ArrowIcon() {
 export default function Masterplan() {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [hoveredHouse, setHoveredHouse] = useState<House | null>(houses[0]);
+  const [isCardVisible, setIsCardVisible] = useState(true);
 
   const visibleHouses = useMemo(() => {
     return activeTab === "amenities" ? [] : houses;
@@ -155,29 +145,48 @@ export default function Masterplan() {
   }, [activeTab]);
 
   const getCardPosition = (house: House | null) => {
-    if (!house) return { left: 20, top: 120 };
+    if (!house) {
+      return {
+        left: "20px",
+        top: "120px",
+        transformOrigin: "left center",
+      };
+    }
 
     const leftNum = parseFloat(house.left);
     const topNum = parseFloat(house.top);
 
+    const blockWidth = 1600;
+    const blockHeight = 730;
     const cardWidth = 375;
     const cardHeight = 500;
-    const offsetX = 46;
-    const minTop = 90;
-    const maxTop = 730 - cardHeight - 20;
+    const offsetX = 52;
+    const padding = 20;
 
-    const prefersRight = leftNum <= 60;
+    const houseX = (leftNum / 100) * blockWidth;
+    const houseY = (topNum / 100) * blockHeight;
 
-    const leftPx = prefersRight
-      ? `calc(${house.left}% + ${offsetX}px)`
-      : `calc(${house.left}% - ${cardWidth + offsetX}px)`;
+    const canOpenRight = houseX + offsetX + cardWidth <= blockWidth - padding;
+    const canOpenLeft = houseX - offsetX - cardWidth >= padding;
 
-    const approximateTop = (730 * topNum) / 100 - 40;
-    const safeTop = Math.max(minTop, Math.min(maxTop, approximateTop));
+    let leftPx = houseX + offsetX;
+    let transformOrigin = "left center";
+
+    if (!canOpenRight && canOpenLeft) {
+      leftPx = houseX - cardWidth - offsetX;
+      transformOrigin = "right center";
+    } else if (!canOpenRight && !canOpenLeft) {
+      leftPx = Math.max(padding, Math.min(blockWidth - cardWidth - padding, houseX - cardWidth / 2));
+      transformOrigin = "center center";
+    }
+
+    const rawTop = houseY - cardHeight / 2 + 22;
+    const safeTop = Math.max(padding, Math.min(blockHeight - cardHeight - padding, rawTop));
 
     return {
-      left: leftPx,
+      left: `${leftPx}px`,
       top: `${safeTop}px`,
+      transformOrigin,
     };
   };
 
@@ -250,7 +259,14 @@ export default function Masterplan() {
             <button
               key={`${house.name}-${index}`}
               type="button"
-              onMouseEnter={() => setHoveredHouse(house)}
+              onMouseEnter={() => {
+                setHoveredHouse(house);
+                setIsCardVisible(false);
+
+                window.setTimeout(() => {
+                  setIsCardVisible(true);
+                }, 20);
+              }}
               className={`absolute z-10 flex h-[44px] w-[44px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-[13px] font-medium shadow-[0_6px_20px_rgba(0,0,0,0.18)] transition-all duration-200 active:scale-[0.95] ${
                 isActive
                   ? "bg-[#DADFC5] text-white hover:scale-[1.08] hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
@@ -275,10 +291,15 @@ export default function Masterplan() {
 
         {hoveredHouse && activeTab !== "amenities" && (
           <div
-            className="absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] opacity-100 backdrop-blur-[26px] transition-opacity duration-300 ease-out"
+            className={`absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px] transition-all duration-300 ease-out ${
+              isCardVisible
+                ? "opacity-100 scale-100"
+                : "pointer-events-none opacity-0 scale-[0.96]"
+            }`}
             style={{
               left: cardPosition.left,
               top: cardPosition.top,
+              transformOrigin: cardPosition.transformOrigin,
             }}
           >
             <div className="flex h-full flex-col p-[20px] text-white">
