@@ -29,7 +29,7 @@ export default function Location() {
   return (
     <section className="bg-[#f5f3ee] pt-[20px]">
       <div className="w-full px-[20px]">
-        <h2 className="max-w-[1360px] text-[56px] font-medium leading-[0.9] tracking-[-0.06em] text-[#1f1f1a] md:text-[88px]">
+        <h2 className="w-full max-w-none text-[56px] font-medium leading-[0.9] tracking-[-0.06em] text-[#1f1f1a] md:text-[88px]">
           Гармония природы и городской жизни
         </h2>
 
@@ -52,7 +52,7 @@ export default function Location() {
             {destinations.map((item) => (
               <article
                 key={item.title}
-                className="relative h-[330px] overflow-hidden border border-[#dedad3] bg-[#f7f5f1] p-[18px]"
+                className="group relative h-[330px] overflow-hidden border border-[#dedad3] bg-[#f7f5f1] p-[18px] transition-all duration-300 hover:border-[#cfc9be] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
               >
                 <h3 className="text-[24px] font-medium leading-[1] tracking-[-0.03em] text-[#1f1f1a]">
                   {item.title}
@@ -75,7 +75,7 @@ export default function Location() {
                     alt={item.title}
                     fill
                     sizes="214px"
-                    className="object-cover"
+                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
                   />
                 </div>
               </article>
@@ -83,7 +83,7 @@ export default function Location() {
           </div>
         </div>
 
-        <div className="h-[500px]" />
+        <div className="h-[340px]" />
       </div>
     </section>
   );
