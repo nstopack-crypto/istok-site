@@ -3,9 +3,9 @@ export default function Footer() {
     <footer id="contacts" className="bg-[#1f1f1a] text-white">
       <div className="mx-auto max-w-[1600px] px-5 py-5">
         <div className="min-h-[616px]">
-          <div className="border-b border-white/10 pb-[140px] pt-0">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-[240px_420px_420px_1fr_40px] md:items-start">
-              <div className="h-[38px] w-[139px]">
+          <div className="border-b border-white/10 pb-[140px]">
+            <div className="relative hidden h-[160px] md:block">
+              <div className="absolute left-0 top-0 h-[38px] w-[139px]">
                 <img
                   src="/logo-istok.svg"
                   alt="Исток"
@@ -13,7 +13,7 @@ export default function Footer() {
                 />
               </div>
 
-              <div className="space-y-[15px] pt-[10px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
+              <div className="absolute left-[550px] top-[10px] space-y-[15px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
                 <a href="#about" className="block transition hover:text-white">
                   О проекте
                 </a>
@@ -37,7 +37,7 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div className="space-y-[15px] pt-[10px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
+              <div className="absolute left-[1075px] top-[10px] space-y-[15px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
                 <a href="#" className="block transition hover:text-white">
                   Благоустройство
                 </a>
@@ -55,21 +55,71 @@ export default function Footer() {
                 </a>
               </div>
 
-              <div />
-
               <a
                 href="#top"
-                className="hidden h-10 w-10 items-start justify-end pt-[2px] text-[20px] leading-none text-white/80 transition hover:text-white md:flex"
+                className="absolute right-0 top-0 text-[20px] leading-none text-white/80 transition hover:text-white"
                 aria-label="Наверх"
               >
                 ↑
               </a>
             </div>
+
+            <div className="space-y-10 md:hidden">
+              <div className="h-[38px] w-[139px]">
+                <img
+                  src="/logo-istok.svg"
+                  alt="Исток"
+                  className="h-full w-full object-contain object-left"
+                />
+              </div>
+
+              <div className="space-y-[15px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
+                <a href="#about" className="block transition hover:text-white">
+                  О проекте
+                </a>
+                <a
+                  href="#apartments"
+                  className="block transition hover:text-white"
+                >
+                  Квартиры
+                </a>
+                <a
+                  href="#purchase"
+                  className="block transition hover:text-white"
+                >
+                  Способы покупки
+                </a>
+                <a href="#contacts" className="block transition hover:text-white">
+                  Контакты
+                </a>
+                <a href="#" className="block transition hover:text-white">
+                  Новости
+                </a>
+              </div>
+
+              <div className="space-y-[15px] text-[14px] uppercase tracking-[0.04em] text-white/80 leading-none">
+                <a href="#" className="block transition hover:text-white">
+                  Благоустройство
+                </a>
+                <a href="#" className="block transition hover:text-white">
+                  Подъезды
+                </a>
+                <a href="#" className="block transition hover:text-white">
+                  Клубная инфраструктура
+                </a>
+                <a href="#" className="block transition hover:text-white">
+                  Тур по комплексу
+                </a>
+                <a href="#" className="block transition hover:text-white">
+                  Документы
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="pt-[140px]">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-[240px_420px_420px_1fr] md:items-start">
-              <div className="max-w-[240px]">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-[280px_420px_420px_1fr] md:items-start">
+              <div>
                 <p className="mb-[158px] text-[32px] leading-[1.2] tracking-[-0.02em] text-white/90">
                   Калининград,
                   <br />
@@ -144,7 +194,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-[82px] border-t border-white/10 pt-[11px]">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-[240px_420px_420px_1fr] md:items-center">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_420px_420px_1fr] md:items-center">
               <p className="text-[14px] text-white/50">© ГК РАСЦВЕТ, 2026</p>
 
               <a
