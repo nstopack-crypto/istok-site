@@ -81,19 +81,8 @@ const galleries: GalleryItem[] = [
 function ArrowRightSmall() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <path
-        d="M4 9H14"
-        stroke="white"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-      <path
-        d="M10 5L14 9L10 13"
-        stroke="white"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M4 9H14" stroke="white" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M10 5L14 9L10 13" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -101,19 +90,8 @@ function ArrowRightSmall() {
 function ArrowLeftNav() {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-      <path
-        d="M17 11H5"
-        stroke="#1F1F1A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M10 6L5 11L10 16"
-        stroke="#1F1F1A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M17 11H5" stroke="#1F1F1A" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M10 6L5 11L10 16" stroke="#1F1F1A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -121,19 +99,8 @@ function ArrowLeftNav() {
 function ArrowRightNav() {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-      <path
-        d="M5 11H17"
-        stroke="#1F1F1A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12 6L17 11L12 16"
-        stroke="#1F1F1A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M5 11H17" stroke="#1F1F1A" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M12 6L17 11L12 16" stroke="#1F1F1A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -141,19 +108,8 @@ function ArrowRightNav() {
 function ArrowLeftCircle() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19 12H5"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M11 6L5 12L11 18"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M19 12H5" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M11 6L5 12L11 18" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -161,19 +117,8 @@ function ArrowLeftCircle() {
 function ArrowRightCircle() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M5 12H19"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M13 6L19 12L13 18"
-        stroke="#1F1F1A"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M5 12H19" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M13 6L19 12L13 18" stroke="#1F1F1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -181,26 +126,14 @@ function ArrowRightCircle() {
 function CloseIcon() {
   return (
     <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-      <path
-        d="M7 7L19 19"
-        stroke="#8A8A8A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path
-        d="M19 7L7 19"
-        stroke="#8A8A8A"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
+      <path d="M7 7L19 19" stroke="#8A8A8A" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M19 7L7 19" stroke="#8A8A8A" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }
 
 export default function Infrastructure() {
-  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(
-    null,
-  );
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -367,8 +300,8 @@ export default function Infrastructure() {
             })}
           </div>
 
-          <div className="relative mt-[160px] h-[291px]">
-            <div className="absolute left-[546px] top-0 w-[1034px]">
+          <div className="relative mt-[200px] h-[500px]">
+            <div className="absolute left-[546px] top-0 flex w-[1034px] flex-col items-start gap-[40px]">
               <p className="text-[40px] font-medium leading-[1.04] tracking-[-0.05em] text-[#1f1f1a]">
                 Здесь архитектура не спорит с природой, а становится её частью.
                 Невысокие дома, спокойные цвета фасадов, зелёные дворы, маршруты
@@ -378,7 +311,7 @@ export default function Infrastructure() {
 
               <a
                 href="#"
-                className="mt-[40px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
+                className="inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
               >
                 3D-тур по лобби
               </a>
@@ -417,15 +350,13 @@ export default function Infrastructure() {
 
               <div className="mb-[24px] flex justify-center">
                 <div
-                  className="relative aspect-[640/720] w-full max-w-[640px] overflow-hidden bg-[#ebe6df] md:max-w-[760px]"
+                  className="w-full max-w-[760px]"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <Image
+                  <img
                     src={activeImage}
                     alt={activeGallery.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 760px"
-                    className="object-cover"
+                    className="h-auto w-full object-contain"
                   />
                 </div>
               </div>

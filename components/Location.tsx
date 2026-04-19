@@ -1,90 +1,89 @@
+"use client";
+
 import Image from "next/image";
 
-const locations = [
+const destinations = [
   {
     title: "Калининград",
-    value: "30",
-    note: "мин на авто",
+    time: "30",
     image: "/images/location-kaliningrad.jpg",
   },
   {
     title: "Зеленоградск",
-    value: "8",
-    note: "мин на авто",
+    time: "8",
     image: "/images/location-zelenogradsk.jpg",
   },
   {
     title: "Аэропорт",
-    value: "16",
-    note: "мин на авто",
+    time: "16",
     image: "/images/location-airport.jpg",
   },
   {
     title: "Куршская коса",
-    value: "13",
-    note: "мин на авто",
+    time: "13",
     image: "/images/location-kosa.jpg",
   },
 ];
 
 export default function Location() {
   return (
-    <section className="bg-[#f5f3ee] py-16 md:py-24">
-      <div className="mx-auto max-w-[1600px] px-5">
-        <h2 className="mb-16 text-[40px] font-medium leading-[1.02] tracking-[-0.04em] text-[#1e1e1e] md:mb-24 md:text-[80px]">
+    <section className="bg-[#f5f3ee] pt-[20px]">
+      <div className="w-full px-[20px]">
+        <h2 className="max-w-[1360px] text-[56px] font-medium leading-[0.9] tracking-[-0.06em] text-[#1f1f1a] md:text-[88px]">
           Гармония природы и городской жизни
         </h2>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[375px_1fr] md:gap-[151px]">
-          <div className="max-w-[375px]">
-            <p className="mb-10 text-[20px] font-medium leading-[1.3] tracking-[-0.02em] text-[#1e1e1e]">
-              Независимый от городских пробок и шума, проект дает возможность
+        <div className="mt-[170px] grid grid-cols-1 gap-x-[66px] md:grid-cols-[394px_1fr]">
+          <div>
+            <p className="max-w-[336px] text-[18px] font-medium leading-[1.18] tracking-[-0.02em] text-[#1f1f1a]">
+              Независимый от городских пробок и шума, проект даёт возможность
               быстро попасть в любую точку Калининградской области.
             </p>
 
-            <button className="border-b-2 border-[#dadfc5] pb-1 text-[12px] font-semibold uppercase leading-[1.15] text-[#1e1e1e] transition hover:opacity-70">
+            <a
+              href="#"
+              className="mt-[58px] inline-block text-[16px] font-medium uppercase tracking-[-0.01em] text-[#1f1f1a] underline decoration-[#cfd3b3] underline-offset-[6px]"
+            >
               Выбрать квартиру
-            </button>
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {locations.map((item, index) => (
+          <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2">
+            {destinations.map((item) => (
               <article
                 key={item.title}
-                className="relative min-h-[320px] border border-[#e1e3e3] bg-white p-5 md:min-h-[375px]"
+                className="relative h-[330px] overflow-hidden border border-[#dedad3] bg-[#f7f5f1] p-[18px]"
               >
-                <h3 className="mb-8 text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-[#1e1e1e]">
+                <h3 className="text-[24px] font-medium leading-[1] tracking-[-0.03em] text-[#1f1f1a]">
                   {item.title}
                 </h3>
 
-                <div className="absolute bottom-5 left-5 flex items-end gap-4">
-                  <div className="text-[64px] font-medium leading-[1.05] tracking-[-0.04em] text-[#1e1e1e] md:text-[80px]">
-                    {item.value}
+                <div className="absolute bottom-[18px] left-[18px] flex items-end gap-[16px]">
+                  <div className="text-[76px] font-medium leading-[0.9] tracking-[-0.06em] text-[#1f1f1a]">
+                    {item.time}
                   </div>
-
-                  <div className="pb-3 text-[16px] font-medium leading-[1.3] tracking-[-0.02em] text-[#1e1e1e]">
-                    <p>мин</p>
-                    <p>на авто</p>
+                  <div className="pb-[10px] text-[18px] font-medium leading-[1.05] tracking-[-0.02em] text-[#1f1f1a]">
+                    мин
+                    <br />
+                    на авто
                   </div>
                 </div>
 
-                <div className="absolute bottom-5 right-5 h-[120px] w-[160px] overflow-hidden md:h-[180px] md:w-[240px]">
+                <div className="absolute bottom-[18px] right-[18px] h-[160px] w-[214px] overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 160px, 240px"
-                    className="object-cover transition duration-500 hover:scale-[1.03]"
+                    sizes="214px"
+                    className="object-cover"
                   />
-                </div>
-
-                <div className="absolute right-5 top-5 text-[12px] text-[#8e8e8e]">
-                  0{index + 1}
                 </div>
               </article>
             ))}
           </div>
         </div>
+
+        <div className="h-[500px]" />
       </div>
     </section>
   );
