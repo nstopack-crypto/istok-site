@@ -9,10 +9,10 @@ import Infrastructure from "../components/Infrastructure";
 import Architecture from "../components/Architecture";
 import Location from "../components/Location";
 import MapSection from "../components/MapSection";
+import Lifestyle from "../components/Lifestyle";
 import DesignerApproved from "../components/DesignerApproved";
 import Layouts from "../components/Layouts";
 import Landscaping from "../components/Landscaping";
-import Lifestyle from "../components/Lifestyle";
 import PurchaseMethods from "../components/PurchaseMethods";
 import ConstructionProgress from "../components/ConstructionProgress";
 import News from "../components/News";
@@ -33,10 +33,10 @@ export default function HomePage() {
       <Architecture />
       <Location />
       <MapSection />
+      <Lifestyle />
       <DesignerApproved />
       <Layouts />
       <Landscaping />
-      <Lifestyle />
       <PurchaseMethods onOpenLead={() => setIsLeadOpen(true)} />
       <ConstructionProgress />
       <News />
