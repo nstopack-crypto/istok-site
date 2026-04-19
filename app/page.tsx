@@ -10,6 +10,9 @@ import Architecture from "../components/Architecture";
 import Location from "../components/Location";
 import Lifestyle from "../components/Lifestyle";
 import PurchaseMethods from "../components/PurchaseMethods";
+import ConstructionProgress from "../components/ConstructionProgress";
+import News from "../components/News";
+import SalesOffice from "../components/SalesOffice";
 import Footer from "../components/Footer";
 import LeadModal from "../components/LeadModal";
 
@@ -27,6 +30,9 @@ export default function HomePage() {
       <Location />
       <Lifestyle />
       <PurchaseMethods onOpenLead={() => setIsLeadOpen(true)} />
+      <ConstructionProgress />
+      <News />
+      <SalesOffice />
       <Footer />
 
       <button
