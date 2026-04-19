@@ -18,6 +18,7 @@ export default function Architecture() {
               src="/images/architecture.jpg"
               alt="Архитектура проекта"
               fill
+              sizes="(max-width: 768px) 100vw, 1034px"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(0,0,0,0.18))]" />

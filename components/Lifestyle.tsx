@@ -50,6 +50,7 @@ export default function Lifestyle() {
                   src={item.image}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition duration-700 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.1))]" />

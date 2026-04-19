@@ -40,6 +40,7 @@ export default function Infrastructure() {
                   src={card.image}
                   alt={card.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition duration-700 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(0,0,0,0.08))]" />

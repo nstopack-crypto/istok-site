@@ -73,6 +73,7 @@ export default function Location() {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 768px) 160px, 240px"
                     className="object-cover transition duration-500 hover:scale-[1.03]"
                   />
                 </div>
