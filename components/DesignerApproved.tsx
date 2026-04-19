@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const cards = [
   {
@@ -20,26 +23,61 @@ const cards = [
 ];
 
 export default function DesignerApproved() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      const start = viewportHeight;
+      const end = -rect.height * 0.35;
+      const current = rect.top;
+
+      const raw = (start - current) / (start - end);
+      const clamped = Math.max(0, Math.min(1, raw));
+
+      setProgress(clamped);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  const topRowY = 60 - progress * 60;
+  const bottomRowY = 110 - progress * 110;
+
   return (
-    <section className="bg-[#efebe4]">
-      <div className="mx-auto max-w-[1600px] px-0">
-        <div className="relative min-h-[980px] overflow-hidden md:min-h-[1048px]">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/designer-bg.jpg"
-              alt="Одобрено дизайнерами"
-              fill
-              sizes="100vw"
-              className="object-cover"
-              priority={false}
-            />
-          </div>
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#efebe4]"
+    >
+      <div className="relative h-[732px] w-full">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/designer-bg.jpg"
+            alt="Одобрено дизайнерами"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
 
-          <div className="absolute inset-0 bg-[rgba(0,0,0,0.06)]" />
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.06)]" />
 
-          <div className="relative z-10 mx-auto max-w-[1600px] px-5 pb-16 pt-16 md:pb-[120px] md:pt-[140px]">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-[412px_930px] md:gap-[82px]">
-              <div className="flex items-end md:min-h-[708px]">
+        <div className="relative z-10 h-full px-[20px]">
+          <div className="mx-auto h-full max-w-[1600px]">
+            <div className="grid h-full grid-cols-1 md:grid-cols-[412px_1fr] md:gap-[62px]">
+              <div className="flex items-end pb-[92px]">
                 <h2 className="max-w-[360px] text-[48px] font-medium leading-[0.98] tracking-[-0.04em] text-white md:text-[64px]">
                   Одобрено
                   <br />
@@ -47,21 +85,75 @@ export default function DesignerApproved() {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div className="relative hidden md:block">
+                <div
+                  className="absolute left-0 top-[140px] grid w-full grid-cols-2 gap-5 transition-transform duration-150 ease-out"
+                  style={{ transform: `translateY(${topRowY}px)` }}
+                >
+                  {cards.slice(0, 2).map((card, index) => (
+                    <article
+                      key={index}
+                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px]"
+                    >
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
+
+                      <div className="relative z-10 flex h-full flex-col justify-between p-5">
+                        <h3 className="max-w-[360px] text-[32px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
+                          {card.title}
+                        </h3>
+
+                        <div className="flex justify-end">
+                          <p className="max-w-[248px] text-[16px] leading-[1.35] tracking-[-0.02em] text-white/95">
+                            {card.text}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+                <div
+                  className="absolute left-0 top-[470px] grid w-full grid-cols-2 gap-5 transition-transform duration-150 ease-out"
+                  style={{ transform: `translateY(${bottomRowY}px)` }}
+                >
+                  {cards.slice(2, 4).map((card, index) => (
+                    <article
+                      key={index}
+                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px]"
+                    >
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
+
+                      <div className="relative z-10 flex h-full flex-col justify-between p-5">
+                        <h3 className="max-w-[360px] text-[32px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
+                          {card.title}
+                        </h3>
+
+                        <div className="flex justify-end">
+                          <p className="max-w-[248px] text-[16px] leading-[1.35] tracking-[-0.02em] text-white/95">
+                            {card.text}
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-5 py-10 md:hidden">
                 {cards.map((card, index) => (
                   <article
                     key={index}
-                    className="relative min-h-[280px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px] md:min-h-[315px]"
+                    className="relative min-h-[240px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px]"
                   >
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
 
-                    <div className="relative z-10 flex h-full flex-col justify-between p-5 md:p-6">
-                      <h3 className="max-w-[360px] text-[28px] font-medium leading-[1.05] tracking-[-0.03em] text-white md:text-[32px]">
+                    <div className="relative z-10 flex h-full flex-col justify-between p-5">
+                      <h3 className="max-w-[360px] text-[28px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
                         {card.title}
                       </h3>
 
                       <div className="flex justify-end">
-                        <p className="max-w-[250px] text-[16px] leading-[1.35] tracking-[-0.02em] text-white/95">
+                        <p className="max-w-[248px] text-[16px] leading-[1.35] tracking-[-0.02em] text-white/95">
                           {card.text}
                         </p>
                       </div>
