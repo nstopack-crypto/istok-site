@@ -47,7 +47,6 @@ export default function DesignerApproved() {
 
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-
       const totalScrollable = rect.height - viewportHeight;
       const passed = -rect.top;
       const rawProgress = totalScrollable > 0 ? passed / totalScrollable : 0;
@@ -68,20 +67,18 @@ export default function DesignerApproved() {
   const titleOpacity = mapRange(progress, 0.0, 0.12, 0, 1);
   const titleY = mapRange(progress, 0.0, 0.12, 40, 0);
 
-  const overlayDarkness = mapRange(progress, 0.12, 0.55, 0.08, 0.26);
+  const overlayDarkness = mapRange(progress, 0.12, 0.55, 0.08, 0.22);
+  const cardsOpacity = mapRange(progress, 0.14, 0.24, 0, 1);
 
-  const cardsOpacity = mapRange(progress, 0.15, 0.28, 0, 1);
-
-  const topRowY = mapRange(progress, 0.18, 0.78, 180, -120);
-  const bottomRowY = mapRange(progress, 0.18, 0.78, 280, -180);
-
-  const holdOpacity = mapRange(progress, 0.75, 0.92, 1, 1);
+  // Безопасные смещения: строки не пересекаются
+  const topRowShift = mapRange(progress, 0.2, 0.72, 90, -45);
+  const bottomRowShift = mapRange(progress, 0.2, 0.72, 130, -20);
 
   return (
     <section
       ref={sectionRef}
       className="relative bg-[#efebe4]"
-      style={{ height: "260vh" }}
+      style={{ height: "240vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0">
@@ -91,7 +88,6 @@ export default function DesignerApproved() {
             fill
             sizes="100vw"
             className="object-cover"
-            priority={false}
           />
         </div>
 
@@ -120,22 +116,23 @@ export default function DesignerApproved() {
               </div>
 
               <div className="relative hidden md:block">
+                {/* Верхний ряд */}
                 <div
-                  className="absolute left-0 top-[120px] grid w-full grid-cols-2 gap-5"
+                  className="absolute left-0 top-[110px] grid w-full grid-cols-2 gap-5"
                   style={{
-                    opacity: cardsOpacity * holdOpacity,
-                    transform: `translateY(${topRowY}px)`,
+                    opacity: cardsOpacity,
+                    transform: `translateY(${topRowShift}px)`,
                   }}
                 >
                   {cards.slice(0, 2).map((card, index) => (
                     <article
                       key={index}
-                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
+                      className="relative h-[300px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
                     >
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
 
                       <div className="relative z-10 flex h-full flex-col justify-between p-5">
-                        <h3 className="max-w-[360px] text-[32px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
+                        <h3 className="max-w-[360px] text-[30px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
                           {card.title}
                         </h3>
 
@@ -149,22 +146,23 @@ export default function DesignerApproved() {
                   ))}
                 </div>
 
+                {/* Нижний ряд */}
                 <div
-                  className="absolute left-0 top-[455px] grid w-full grid-cols-2 gap-5"
+                  className="absolute left-0 top-[430px] grid w-full grid-cols-2 gap-5"
                   style={{
-                    opacity: cardsOpacity * holdOpacity,
-                    transform: `translateY(${bottomRowY}px)`,
+                    opacity: cardsOpacity,
+                    transform: `translateY(${bottomRowShift}px)`,
                   }}
                 >
                   {cards.slice(2, 4).map((card, index) => (
                     <article
                       key={index}
-                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
+                      className="relative h-[300px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
                     >
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
 
                       <div className="relative z-10 flex h-full flex-col justify-between p-5">
-                        <h3 className="max-w-[360px] text-[32px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
+                        <h3 className="max-w-[360px] text-[30px] font-medium leading-[1.05] tracking-[-0.03em] text-white">
                           {card.title}
                         </h3>
 
