@@ -1,3 +1,7 @@
+type PurchaseMethodsProps = {
+  onOpenLead: () => void;
+};
+
 const methods = [
   {
     title: "Ипотека",
@@ -17,7 +21,9 @@ const methods = [
   },
 ];
 
-export default function PurchaseMethods() {
+export default function PurchaseMethods({
+  onOpenLead,
+}: PurchaseMethodsProps) {
   return (
     <section
       id="purchase"
@@ -37,7 +43,11 @@ export default function PurchaseMethods() {
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[375px_1fr] md:gap-[151px]">
           <div>
-            <button className="border-b-2 border-[#dadfc5] pb-1 text-[12px] font-semibold uppercase leading-[1.15] text-[#1e1e1e] transition hover:opacity-70">
+            <button
+              type="button"
+              onClick={onOpenLead}
+              className="border-b-2 border-[#dadfc5] pb-1 text-[12px] font-semibold uppercase leading-[1.15] text-[#1e1e1e] transition hover:opacity-70"
+            >
               Получить предложение
             </button>
           </div>

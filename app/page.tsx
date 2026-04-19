@@ -26,7 +26,7 @@ export default function HomePage() {
       <Architecture />
       <Location />
       <Lifestyle />
-      <PurchaseMethods />
+      <PurchaseMethods onOpenLead={() => setIsLeadOpen(true)} />
       <Footer />
 
       <button
