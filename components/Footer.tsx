@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer id="contacts" className="bg-[#1f1f1a] text-white">
@@ -8,11 +6,10 @@ export default function Footer() {
           <div className="border-b border-white/10 pb-[140px] pt-0">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-[139px_375px_375px_24px] md:items-start md:gap-x-[152px]">
               <div className="h-[38px] w-[139px]">
-                <Image
+                <img
                   src="/logo-istok.svg"
                   alt="Исток"
                   className="h-full w-full object-contain object-left"
-                  priority={false}
                 />
               </div>
 
