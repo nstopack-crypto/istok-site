@@ -124,15 +124,15 @@ function AmenityIcon({ type }: { type: Amenity["icon"] }) {
 
 function ArrowIcon() {
   return (
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
-        d="M6 13H20"
+        d="M5 12H19"
         stroke="#1F1F1A"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
-        d="M14 7L20 13L14 19"
+        d="M13 6L19 12L13 18"
         stroke="#1F1F1A"
         strokeWidth="2"
         strokeLinecap="round"
@@ -160,17 +160,24 @@ export default function Masterplan() {
     const leftNum = parseFloat(house.left);
     const topNum = parseFloat(house.top);
 
-    const isRightSide = leftNum > 60;
-    const isBottomSide = topNum > 62;
+    const cardWidth = 375;
+    const cardHeight = 500;
+    const offsetX = 46;
+    const minTop = 90;
+    const maxTop = 730 - cardHeight - 20;
 
-    const horizontal = isRightSide ? "auto" : `calc(${house.left} + 46px)`;
-    const right = isRightSide ? `calc(${100 - leftNum}% + 46px)` : "auto";
-    const vertical = isBottomSide ? `calc(${house.top} - 500px)` : `calc(${house.top} - 40px)`;
+    const prefersRight = leftNum <= 60;
+
+    const leftPx = prefersRight
+      ? `calc(${house.left}% + ${offsetX}px)`
+      : `calc(${house.left}% - ${cardWidth + offsetX}px)`;
+
+    const approximateTop = (730 * topNum) / 100 - 40;
+    const safeTop = Math.max(minTop, Math.min(maxTop, approximateTop));
 
     return {
-      left: horizontal,
-      right,
-      top: vertical,
+      left: leftPx,
+      top: `${safeTop}px`,
     };
   };
 
@@ -268,10 +275,9 @@ export default function Masterplan() {
 
         {hoveredHouse && activeTab !== "amenities" && (
           <div
-            className="absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px] transition-opacity duration-200"
+            className="absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] opacity-100 backdrop-blur-[26px] transition-opacity duration-300 ease-out"
             style={{
               left: cardPosition.left,
-              right: cardPosition.right,
               top: cardPosition.top,
             }}
           >
