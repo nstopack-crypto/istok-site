@@ -22,6 +22,21 @@ const cards = [
   },
 ];
 
+function clamp(value: number, min = 0, max = 1) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function mapRange(
+  value: number,
+  inMin: number,
+  inMax: number,
+  outMin: number,
+  outMax: number,
+) {
+  const progress = clamp((value - inMin) / (inMax - inMin));
+  return outMin + (outMax - outMin) * progress;
+}
+
 export default function DesignerApproved() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -33,14 +48,11 @@ export default function DesignerApproved() {
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      const start = viewportHeight * 0.95;
-      const end = -rect.height * 0.15;
-      const current = rect.top;
+      const totalScrollable = rect.height - viewportHeight;
+      const passed = -rect.top;
+      const rawProgress = totalScrollable > 0 ? passed / totalScrollable : 0;
 
-      const raw = (start - current) / (start - end);
-      const clamped = Math.max(0, Math.min(1, raw));
-
-      setProgress(clamped);
+      setProgress(clamp(rawProgress));
     };
 
     handleScroll();
@@ -53,15 +65,25 @@ export default function DesignerApproved() {
     };
   }, []);
 
-  const topRowY = 90 - progress * 120;
-  const bottomRowY = 160 - progress * 180;
+  const titleOpacity = mapRange(progress, 0.0, 0.12, 0, 1);
+  const titleY = mapRange(progress, 0.0, 0.12, 40, 0);
+
+  const overlayDarkness = mapRange(progress, 0.12, 0.55, 0.08, 0.26);
+
+  const cardsOpacity = mapRange(progress, 0.15, 0.28, 0, 1);
+
+  const topRowY = mapRange(progress, 0.18, 0.78, 180, -120);
+  const bottomRowY = mapRange(progress, 0.18, 0.78, 280, -180);
+
+  const holdOpacity = mapRange(progress, 0.75, 0.92, 1, 1);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#efebe4]"
+      className="relative bg-[#efebe4]"
+      style={{ height: "260vh" }}
     >
-      <div className="relative h-screen min-h-[732px] w-full">
+      <div className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src="/images/designer-bg.jpg"
@@ -69,16 +91,28 @@ export default function DesignerApproved() {
             fill
             sizes="100vw"
             className="object-cover"
+            priority={false}
           />
         </div>
 
-        <div className="absolute inset-0 bg-[rgba(0,0,0,0.08)]" />
+        <div
+          className="absolute inset-0 bg-black transition-[background-color] duration-150"
+          style={{
+            backgroundColor: `rgba(0,0,0,${overlayDarkness})`,
+          }}
+        />
 
         <div className="relative z-10 h-full px-[20px]">
           <div className="mx-auto h-full max-w-[1600px]">
             <div className="grid h-full grid-cols-1 md:grid-cols-[380px_1fr] md:gap-[92px]">
-              <div className="flex items-end pb-[64px] md:pb-[78px]">
-                <h2 className="max-w-[340px] text-[48px] font-medium leading-[0.98] tracking-[-0.04em] text-white md:text-[64px]">
+              <div className="flex items-end pb-[72px] md:pb-[84px]">
+                <h2
+                  className="max-w-[340px] text-[48px] font-medium leading-[0.98] tracking-[-0.04em] text-white md:text-[64px] transition-[transform,opacity] duration-300"
+                  style={{
+                    opacity: titleOpacity,
+                    transform: `translateY(${titleY}px)`,
+                  }}
+                >
                   Одобрено
                   <br />
                   дизайнерами
@@ -87,8 +121,11 @@ export default function DesignerApproved() {
 
               <div className="relative hidden md:block">
                 <div
-                  className="absolute left-0 top-[120px] grid w-full grid-cols-2 gap-5 will-change-transform"
-                  style={{ transform: `translateY(${topRowY}px)` }}
+                  className="absolute left-0 top-[120px] grid w-full grid-cols-2 gap-5"
+                  style={{
+                    opacity: cardsOpacity * holdOpacity,
+                    transform: `translateY(${topRowY}px)`,
+                  }}
                 >
                   {cards.slice(0, 2).map((card, index) => (
                     <article
@@ -113,8 +150,11 @@ export default function DesignerApproved() {
                 </div>
 
                 <div
-                  className="absolute left-0 top-[455px] grid w-full grid-cols-2 gap-5 will-change-transform"
-                  style={{ transform: `translateY(${bottomRowY}px)` }}
+                  className="absolute left-0 top-[455px] grid w-full grid-cols-2 gap-5"
+                  style={{
+                    opacity: cardsOpacity * holdOpacity,
+                    transform: `translateY(${bottomRowY}px)`,
+                  }}
                 >
                   {cards.slice(2, 4).map((card, index) => (
                     <article
