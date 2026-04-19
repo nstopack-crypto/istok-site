@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const slides = [
   {
@@ -26,12 +26,15 @@ const slides = [
 
 export default function Landscaping() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [contentVisible, setContentVisible] = useState(true);
   const [isLeftSide, setIsLeftSide] = useState(true);
   const [cursorVisible, setCursorVisible] = useState(false);
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const activeSlide = slides[activeIndex];
+  const activeSlide = slides[displayIndex];
 
   const nextIndex = useMemo(() => {
     return (activeIndex + 1) % slides.length;
@@ -39,6 +42,10 @@ export default function Landscaping() {
 
   const prevIndex = useMemo(() => {
     return (activeIndex - 1 + slides.length) % slides.length;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    setDisplayIndex(activeIndex);
   }, [activeIndex]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
@@ -51,46 +58,79 @@ export default function Landscaping() {
     setIsLeftSide(x < rect.width / 2);
   };
 
+  const animateTo = (targetIndex: number) => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+    setContentVisible(false);
+
+    window.setTimeout(() => {
+      setActiveIndex(targetIndex);
+      setDisplayIndex(targetIndex);
+      setContentVisible(true);
+
+      window.setTimeout(() => {
+        setIsAnimating(false);
+      }, 450);
+    }, 220);
+  };
+
   const handleClick = () => {
     if (isLeftSide) {
-      setActiveIndex(prevIndex);
+      animateTo(prevIndex);
     } else {
-      setActiveIndex(nextIndex);
+      animateTo(nextIndex);
     }
   };
 
   return (
     <section
-      className="relative h-screen min-h-[732px] w-full overflow-hidden bg-[#efebe4] cursor-none"
+      className="relative w-full overflow-hidden bg-[#efebe4] cursor-none"
+      style={{ height: 750 }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setCursorVisible(true)}
       onMouseLeave={() => setCursorVisible(false)}
       onClick={handleClick}
     >
       <div className="absolute inset-0">
-        <Image
-          src={activeSlide.image}
-          alt={activeSlide.title}
-          fill
-          sizes="100vw"
-          className="object-cover transition-opacity duration-500"
-        />
+        <div
+          className={`absolute inset-0 transition-all duration-500 ease-out ${
+            contentVisible
+              ? "translate-x-0 opacity-100"
+              : isLeftSide
+                ? "translate-x-[24px] opacity-0"
+                : "-translate-x-[24px] opacity-0"
+          }`}
+        >
+          <Image
+            src={activeSlide.image}
+            alt={activeSlide.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
       </div>
 
       <div className="absolute inset-0 bg-[rgba(0,0,0,0.18)]" />
 
       <div className="relative z-10 h-full w-full px-[20px]">
-        <h2 className="pt-[20px] text-[48px] font-medium leading-[0.95] tracking-[-0.04em] text-white md:max-w-[1050px] md:text-[76px]">
+        <h2 className="pt-[20px] max-w-[1100px] text-[48px] font-medium leading-[0.95] tracking-[-0.04em] text-white md:text-[76px]">
           Благоустройство и озеленение
         </h2>
 
-        {/* Desktop card with fixed size and position */}
         <div
-          className="absolute hidden overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px] md:block"
+          className={`absolute hidden overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px] transition-all duration-500 ease-out md:block ${
+            contentVisible
+              ? "translate-x-0 opacity-100"
+              : isLeftSide
+                ? "translate-x-[32px] opacity-0"
+                : "-translate-x-[32px] opacity-0"
+          }`}
           style={{
             width: 507,
             height: 350,
-            left: 1075,
+            right: 20,
             top: 170,
           }}
           onClick={(e) => e.stopPropagation()}
@@ -114,8 +154,15 @@ export default function Landscaping() {
           </div>
         </div>
 
-        {/* Mobile card */}
-        <div className="absolute bottom-[36px] left-[20px] right-[20px] md:hidden">
+        <div
+          className={`absolute bottom-[36px] left-[20px] right-[20px] transition-all duration-500 ease-out md:hidden ${
+            contentVisible
+              ? "translate-x-0 opacity-100"
+              : isLeftSide
+                ? "translate-x-[20px] opacity-0"
+                : "-translate-x-[20px] opacity-0"
+          }`}
+        >
           <div
             className="overflow-hidden bg-[rgba(223,223,223,0.28)] p-5 backdrop-blur-[24px]"
             onClick={(e) => e.stopPropagation()}
