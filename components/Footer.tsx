@@ -7,13 +7,11 @@ export default function Footer() {
         <div className="min-h-[616px]">
           <div className="border-b border-white/10 pb-[140px] pt-0">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-[139px_375px_375px_24px] md:items-start md:gap-x-[152px]">
-              <div className="relative h-[38px] w-[139px]">
+              <div className="h-[38px] w-[139px]">
                 <Image
                   src="/logo-istok.svg"
                   alt="Исток"
-                  fill
-                  sizes="139px"
-                  className="object-contain object-left"
+                  className="h-full w-full object-contain object-left"
                   priority={false}
                 />
               </div>
