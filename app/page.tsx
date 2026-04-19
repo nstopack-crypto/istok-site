@@ -8,6 +8,7 @@ import Masterplan from "../components/Masterplan";
 import Infrastructure from "../components/Infrastructure";
 import Architecture from "../components/Architecture";
 import Location from "../components/Location";
+import DesignerApproved from "../components/DesignerApproved";
 import Lifestyle from "../components/Lifestyle";
 import PurchaseMethods from "../components/PurchaseMethods";
 import ConstructionProgress from "../components/ConstructionProgress";
@@ -28,6 +29,7 @@ export default function HomePage() {
       <Infrastructure />
       <Architecture />
       <Location />
+      <DesignerApproved />
       <Lifestyle />
       <PurchaseMethods onOpenLead={() => setIsLeadOpen(true)} />
       <ConstructionProgress />
