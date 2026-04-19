@@ -10,7 +10,6 @@ type House = {
   top: string;
   left: string;
   title: string;
-  subtitle: string;
   flats: {
     type: string;
     count: number;
@@ -49,12 +48,11 @@ const houses: House[] = housePositions.map((pos, index) => ({
   top: pos.top,
   left: pos.left,
   title: `Корпус ${index + 1}`,
-  subtitle: "Корпус",
   flats: [
-    { type: "1к", count: 2 + (index % 3), price: `от ${9.1 + index * 0.1} млн ₽` },
-    { type: "2к", count: 2 + (index % 2), price: `от ${10.2 + index * 0.15} млн ₽` },
-    { type: "3к", count: 1 + (index % 3), price: `от ${12.8 + index * 0.2} млн ₽` },
-    { type: "4к", count: 1, price: `от ${16.4 + index * 0.25} млн ₽` },
+    { type: "1к", count: 2 + (index % 3), price: "от 9,3 млн ₽" },
+    { type: "2к", count: 2 + (index % 2), price: "от 9,3 млн ₽" },
+    { type: "3к", count: 2, price: "от 9,3 млн ₽" },
+    { type: "4к", count: 2, price: "от 9,3 млн ₽" },
   ],
 }));
 
@@ -124,6 +122,26 @@ function AmenityIcon({ type }: { type: Amenity["icon"] }) {
   }
 }
 
+function ArrowIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+      <path
+        d="M6 13H20"
+        stroke="#1F1F1A"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 7L20 13L14 19"
+        stroke="#1F1F1A"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function Masterplan() {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [hoveredHouse, setHoveredHouse] = useState<House | null>(houses[0]);
@@ -135,6 +153,28 @@ export default function Masterplan() {
   const visibleAmenities = useMemo(() => {
     return activeTab === "houses" ? [] : amenities;
   }, [activeTab]);
+
+  const getCardPosition = (house: House | null) => {
+    if (!house) return { left: 20, top: 120 };
+
+    const leftNum = parseFloat(house.left);
+    const topNum = parseFloat(house.top);
+
+    const isRightSide = leftNum > 60;
+    const isBottomSide = topNum > 62;
+
+    const horizontal = isRightSide ? "auto" : `calc(${house.left} + 46px)`;
+    const right = isRightSide ? `calc(${100 - leftNum}% + 46px)` : "auto";
+    const vertical = isBottomSide ? `calc(${house.top} - 500px)` : `calc(${house.top} - 40px)`;
+
+    return {
+      left: horizontal,
+      right,
+      top: vertical,
+    };
+  };
+
+  const cardPosition = getCardPosition(hoveredHouse);
 
   return (
     <section className="relative w-full overflow-hidden bg-[#f5f3ee]">
@@ -227,20 +267,27 @@ export default function Masterplan() {
         ))}
 
         {hoveredHouse && activeTab !== "amenities" && (
-          <div className="absolute right-[20px] top-[140px] z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px]">
-            <div className="flex h-full flex-col p-[28px] text-white">
-              <div className="space-y-[18px]">
+          <div
+            className="absolute z-30 h-[500px] w-[375px] overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[26px] transition-opacity duration-200"
+            style={{
+              left: cardPosition.left,
+              right: cardPosition.right,
+              top: cardPosition.top,
+            }}
+          >
+            <div className="flex h-full flex-col p-[20px] text-white">
+              <div className="space-y-[20px]">
                 {hoveredHouse.flats.map((flat) => (
-                  <div key={flat.type} className="flex items-start gap-[18px]">
-                    <div className="flex h-[72px] w-[72px] items-center justify-center border border-white text-[24px] font-medium text-white">
+                  <div key={flat.type} className="flex items-start gap-[20px]">
+                    <div className="flex h-[40px] w-[40px] items-center justify-center border border-white text-[16px] font-medium leading-none text-white">
                       {flat.type}
                     </div>
 
-                    <div className="pt-[2px]">
-                      <p className="text-[24px] font-medium leading-[1.02] tracking-[-0.03em] text-white">
+                    <div>
+                      <p className="text-[16px] font-medium leading-[1.12] tracking-[-0.03em] text-white">
                         {flat.count} квартиры
                       </p>
-                      <p className="text-[24px] font-medium leading-[1.02] tracking-[-0.03em] text-white">
+                      <p className="mt-[2px] text-[16px] font-medium leading-[1.12] tracking-[-0.03em] text-white">
                         {flat.price}
                       </p>
                     </div>
@@ -250,19 +297,19 @@ export default function Masterplan() {
 
               <div className="mt-auto flex items-end justify-between gap-4">
                 <div>
-                  <p className="mb-3 text-[20px] font-medium text-white">
+                  <p className="mb-3 text-[20px] font-medium leading-none text-white">
                     {hoveredHouse.title}
                   </p>
-                  <h3 className="text-[56px] font-medium leading-[0.95] tracking-[-0.05em] text-white">
-                    {hoveredHouse.subtitle}
+                  <h3 className="text-[48px] font-medium leading-[0.95] tracking-[-0.05em] text-white">
+                    Корпус {hoveredHouse.name.replace("К", "")}
                   </h3>
                 </div>
 
                 <button
                   type="button"
-                  className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white text-[28px] text-[#1f1f1a] transition hover:scale-105"
+                  className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-white transition hover:scale-105"
                 >
-                  →
+                  <ArrowIcon />
                 </button>
               </div>
             </div>
