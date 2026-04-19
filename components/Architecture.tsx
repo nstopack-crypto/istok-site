@@ -1,55 +1,181 @@
+"use client";
+
 import Image from "next/image";
+import { useMemo, useState } from "react";
+
+const slides = [
+  {
+    image: "/images/architecture-1.jpg",
+    counter: "01 — 03",
+    text: "Архитектура проекта строится на сочетании спокойной пластики, природной палитры и выразительных деталей, которые формируют благородный и современный образ квартала.",
+    title: "Архитектура и дизайн",
+  },
+  {
+    image: "/images/architecture-2.jpg",
+    counter: "02 — 03",
+    text: "Фасады, пропорции окон, ритм объёмов и материалы подобраны так, чтобы среда выглядела цельной, тихой и визуально устойчивой.",
+    title: "Фасады и материалы",
+  },
+  {
+    image: "/images/architecture-3.jpg",
+    counter: "03 — 03",
+    text: "Интерьеры общественных зон продолжают общую концепцию проекта: много воздуха, тактильные поверхности, мягкий свет и спокойные оттенки.",
+    title: "Интерьеры и детали",
+  },
+];
 
 export default function Architecture() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [isLeftSide, setIsLeftSide] = useState(true);
+  const [cursorVisible, setCursorVisible] = useState(false);
+  const [cursorX, setCursorX] = useState(0);
+  const [cursorY, setCursorY] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+
+  const activeSlide = slides[displayIndex];
+
+  const nextIndex = useMemo(() => {
+    return (activeIndex + 1) % slides.length;
+  }, [activeIndex]);
+
+  const prevIndex = useMemo(() => {
+    return (activeIndex - 1 + slides.length) % slides.length;
+  }, [activeIndex]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    setCursorX(x);
+    setCursorY(y);
+    setIsLeftSide(x < rect.width / 2);
+  };
+
+  const animateTo = (targetIndex: number) => {
+    if (isFading) return;
+
+    setIsFading(true);
+
+    window.setTimeout(() => {
+      setActiveIndex(targetIndex);
+      setDisplayIndex(targetIndex);
+
+      window.setTimeout(() => {
+        setIsFading(false);
+      }, 450);
+    }, 250);
+  };
+
+  const handleClick = () => {
+    if (isLeftSide) {
+      animateTo(prevIndex);
+    } else {
+      animateTo(nextIndex);
+    }
+  };
+
   return (
-    <section className="bg-[#f5f3ee] py-16 md:py-24">
-      <div className="mx-auto max-w-[1600px] px-5">
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-[1fr_1034px] md:items-start">
-          <div>
-            <h2 className="max-w-[480px] text-[36px] font-medium leading-[1.05] tracking-[-0.03em] text-[#1e1e1e] md:text-[72px]">
-              Архитектура
-              <br />
-              и дизайн
-            </h2>
-          </div>
+    <section
+      className="relative w-full overflow-hidden bg-[#111111] cursor-none"
+      style={{ height: 750 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setCursorVisible(true)}
+      onMouseLeave={() => setCursorVisible(false)}
+      onClick={handleClick}
+    >
+      <div className="absolute inset-0">
+        <div
+          className={`absolute inset-0 transition-opacity duration-[700ms] ease-out ${
+            isFading ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <Image
+            src={activeSlide.image}
+            alt={activeSlide.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      </div>
 
-          <div className="relative aspect-[1034/732] overflow-hidden bg-[#d8d1c4]">
-            <Image
-              src="/images/architecture.jpg"
-              alt="Архитектура проекта"
-              fill
-              sizes="(max-width: 768px) 100vw, 1034px"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(0,0,0,0.18))]" />
+      <div className="absolute inset-0 bg-[rgba(0,0,0,0.34)]" />
 
-            <div className="absolute right-6 top-6 bg-white/75 px-3 py-2 text-[13px] tracking-[-0.02em] text-[#1e1e1e] backdrop-blur">
-              Фасады в природной палитре
+      <div className="relative z-10 h-full w-full px-[20px]">
+        <h2 className="max-w-[980px] pt-[20px] text-[44px] font-medium leading-[0.94] tracking-[-0.045em] text-white md:text-[72px]">
+          Архитектура и дизайн
+        </h2>
+
+        <div
+          className={`absolute hidden overflow-hidden bg-[rgba(223,223,223,0.22)] backdrop-blur-[24px] transition-opacity duration-[700ms] ease-out md:block ${
+            isFading ? "opacity-0" : "opacity-100"
+          }`}
+          style={{
+            width: 507,
+            height: 350,
+            right: 20,
+            top: 170,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex h-full flex-col p-5">
+            <div className="mb-8 flex items-start justify-between gap-6">
+              <p className="text-[18px] font-medium leading-none text-white">
+                {activeSlide.counter}
+              </p>
+
+              <p className="max-w-[248px] text-[15px] font-medium leading-[1.45] tracking-[-0.02em] text-white">
+                {activeSlide.text}
+              </p>
             </div>
 
-            <div className="absolute bottom-6 left-6 max-w-[420px] bg-black/35 px-4 py-3 text-[14px] leading-[1.4] tracking-[-0.02em] text-white backdrop-blur-sm">
-              Невысокие дома, спокойные оттенки, мягкая геометрия и визуальная
-              тишина.
+            <div className="mt-auto">
+              <h3 className="max-w-[360px] text-[34px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
+                {activeSlide.title}
+              </h3>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_1034px]">
-          <div />
-          <div className="max-w-[1034px]">
-            <p className="text-[24px] leading-[1.35] tracking-[-0.02em] text-[#1e1e1e] md:text-[40px] md:leading-[1.2]">
-              Здесь архитектура не спорит с природой, а становится её частью.
-              Невысокие дома, спокойные цвета фасадов, зелёные дворы, маршруты
-              для прогулок и места для отдыха — всё продумано так, чтобы жизнь
-              текла спокойно и естественно.
-            </p>
+        <div
+          className={`absolute bottom-[36px] left-[20px] right-[20px] transition-opacity duration-[700ms] ease-out md:hidden ${
+            isFading ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <div
+            className="overflow-hidden bg-[rgba(223,223,223,0.22)] p-5 backdrop-blur-[24px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-8 flex items-start justify-between gap-6">
+              <p className="text-[18px] font-medium leading-none text-white">
+                {activeSlide.counter}
+              </p>
 
-            <button className="mt-8 border-b border-[#1e1e1e] pb-1 text-[16px] leading-[1.3] tracking-[-0.02em] text-[#1e1e1e] transition hover:opacity-70">
-              Подробнее об архитектуре
-            </button>
+              <p className="max-w-[248px] text-[15px] font-medium leading-[1.45] tracking-[-0.02em] text-white">
+                {activeSlide.text}
+              </p>
+            </div>
+
+            <h3 className="max-w-[360px] text-[34px] font-medium leading-[0.98] tracking-[-0.03em] text-white">
+              {activeSlide.title}
+            </h3>
           </div>
         </div>
       </div>
+
+      {cursorVisible && (
+        <div
+          className="pointer-events-none absolute z-20 hidden h-[82px] w-[82px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white text-[34px] text-white md:flex"
+          style={{
+            left: cursorX,
+            top: cursorY,
+          }}
+        >
+          {isLeftSide ? "←" : "→"}
+        </div>
+      )}
     </section>
   );
 }
