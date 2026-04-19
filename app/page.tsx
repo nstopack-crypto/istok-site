@@ -9,6 +9,8 @@ import Infrastructure from "../components/Infrastructure";
 import Architecture from "../components/Architecture";
 import Location from "../components/Location";
 import DesignerApproved from "../components/DesignerApproved";
+import Layouts from "../components/Layouts";
+import Landscaping from "../components/Landscaping";
 import Lifestyle from "../components/Lifestyle";
 import PurchaseMethods from "../components/PurchaseMethods";
 import ConstructionProgress from "../components/ConstructionProgress";
@@ -30,6 +32,8 @@ export default function HomePage() {
       <Architecture />
       <Location />
       <DesignerApproved />
+      <Layouts />
+      <Landscaping />
       <Lifestyle />
       <PurchaseMethods onOpenLead={() => setIsLeadOpen(true)} />
       <ConstructionProgress />
