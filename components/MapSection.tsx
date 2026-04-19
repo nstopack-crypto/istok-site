@@ -18,39 +18,47 @@ type Place = {
   top: string;
   left: string;
   image?: string;
-  label?: string;
 };
 
 const places: Place[] = [
-  { type: "restaurants", top: "8%", left: "34%", image: "/images/map-restaurant-1.jpg" },
-  { type: "restaurants", top: "15%", left: "40%", image: "/images/map-restaurant-2.jpg" },
+  { type: "restaurants", top: "9%", left: "34%", image: "/images/map-restaurant-1.jpg" },
+  { type: "restaurants", top: "16%", left: "38%", image: "/images/map-restaurant-2.jpg" },
 
   { type: "education", top: "23%", left: "32%" },
-  { type: "education", top: "34%", left: "47%" },
+  { type: "education", top: "33%", left: "45%" },
 
-  { type: "sport", top: "39%", left: "13%" },
-  { type: "sport", top: "48%", left: "28%" },
-  { type: "sport", top: "63%", left: "50%" },
+  { type: "sport", top: "40%", left: "13%" },
+  { type: "sport", top: "49%", left: "28%" },
+  { type: "sport", top: "63%", left: "65%" },
+  { type: "sport", top: "77%", left: "81%" },
 
   { type: "business", top: "34%", left: "31%" },
   { type: "business", top: "45%", left: "62%" },
-  { type: "business", top: "69%", left: "88%" },
+  { type: "business", top: "63%", left: "95%" },
+  { type: "business", top: "77%", left: "90%" },
+  { type: "business", top: "83%", left: "27%" },
+  { type: "business", top: "51%", left: "2%" },
+
+  { type: "restaurants", top: "57%", left: "76%" },
+  { type: "restaurants", top: "86%", left: "60%", image: "/images/map-restaurant-3.jpg" },
 
   { type: "airport", top: "39%", left: "54%" },
 
-  { type: "restaurants", top: "58%", left: "76%" },
-  { type: "restaurants", top: "86%", left: "61%", image: "/images/map-restaurant-3.jpg" },
-
-  { type: "business", top: "51%", left: "2%" },
-  { type: "sport", top: "71%", left: "9%" },
-  { type: "business", top: "82%", left: "28%" },
-  { type: "sport", top: "91%", left: "18%" },
+  { type: "sport", top: "71%", left: "8%" },
+  { type: "sport", top: "92%", left: "18%" },
+  { type: "sport", top: "60%", left: "35%" },
 
   { type: "education", top: "32%", left: "46%" },
-  { type: "education", top: "57%", left: "33%" },
+  { type: "education", top: "58%", left: "33%" },
+];
 
-  { type: "airport", top: "74%", left: "69%" },
-  { type: "business", top: "63%", left: "95%" },
+const tabs: { key: TabType; label: string; count: number }[] = [
+  { key: "all", label: "Все объекты", count: 11 },
+  { key: "sport", label: "Спорт", count: 3 },
+  { key: "business", label: "Бизнес", count: 8 },
+  { key: "restaurants", label: "Рестораны", count: 8 },
+  { key: "education", label: "Образование", count: 8 },
+  { key: "airport", label: "Аэропорт", count: 8 },
 ];
 
 function StarIcon() {
@@ -138,19 +146,6 @@ function getPlaceIcon(type: PlaceType) {
   }
 }
 
-const tabs: {
-  key: TabType;
-  label: string;
-  count: number;
-}[] = [
-  { key: "all", label: "Все объекты", count: 11 },
-  { key: "sport", label: "Спорт", count: 3 },
-  { key: "business", label: "Бизнес", count: 8 },
-  { key: "restaurants", label: "Рестораны", count: 8 },
-  { key: "education", label: "Образование", count: 8 },
-  { key: "airport", label: "Аэропорт", count: 8 },
-];
-
 export default function MapSection() {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -170,7 +165,7 @@ export default function MapSection() {
           style={{ transform: `scale(${zoomScale})` }}
         >
           <Image
-            src="/images/map-bg.jpg"
+            src="/images/map-bg-v2.jpg"
             alt="Карта района"
             fill
             sizes="100vw"
@@ -179,7 +174,7 @@ export default function MapSection() {
           />
         </div>
 
-        <div className="absolute inset-0 bg-[rgba(255,255,255,0.28)]" />
+        <div className="absolute inset-0 bg-[rgba(255,255,255,0.24)]" />
 
         <div className="absolute left-[20px] top-[20px] z-20 flex flex-wrap gap-[6px]">
           {tabs.map((tab) => {
@@ -236,7 +231,7 @@ export default function MapSection() {
           );
         })}
 
-        <div className="absolute left-[55%] top-[61%] z-20 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-[56%] top-[62%] z-20 -translate-x-1/2 -translate-y-1/2">
           <div className="relative flex items-center justify-center bg-[#3d3a36] px-[18px] py-[16px] shadow-[0_12px_40px_rgba(0,0,0,0.2)]">
             <div className="relative h-[28px] w-[150px]">
               <Image
