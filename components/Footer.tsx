@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1600px] px-5 py-5">
         <div className="min-h-[616px]">
           <div className="border-b border-white/10 pb-[140px] pt-0">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-[139px_375px_375px_24px] md:items-start md:gap-x-[152px]">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-[220px_360px_360px_1fr_40px] md:items-start">
               <div className="h-[38px] w-[139px]">
                 <img
                   src="/logo-istok.svg"
@@ -55,9 +55,11 @@ export default function Footer() {
                 </a>
               </div>
 
+              <div />
+
               <a
                 href="#top"
-                className="hidden h-6 w-6 items-start justify-start text-[20px] leading-none text-white/80 transition hover:text-white md:flex"
+                className="hidden h-10 w-10 items-start justify-end text-[20px] leading-none text-white/80 transition hover:text-white md:flex"
                 aria-label="Наверх"
               >
                 ↑
@@ -66,10 +68,12 @@ export default function Footer() {
           </div>
 
           <div className="pt-[140px]">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-[279px_903px] md:gap-x-[247px]">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-[360px_1fr] md:gap-x-[200px]">
               <div>
-                <p className="mb-[158px] max-w-[279px] text-[32px] leading-[1.2] tracking-[-0.02em] text-white/90">
-                  Калининград, ул. Костромская, 10,
+                <p className="mb-[158px] max-w-[320px] text-[32px] leading-[1.2] tracking-[-0.02em] text-white/90">
+                  Калининград,
+                  <br />
+                  ул. Костромская, 10
                 </p>
 
                 <div className="flex items-center gap-4 text-[16px] text-white/80">
@@ -88,7 +92,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-y-[40px] md:grid-cols-[375px_375px] md:gap-x-[153px]">
+              <div className="grid grid-cols-1 gap-y-[40px] md:grid-cols-[360px_360px] md:gap-x-[200px]">
                 <div>
                   <p className="mb-2 text-[21px] leading-none text-white/50">
                     Офис
@@ -136,31 +140,29 @@ export default function Footer() {
           </div>
 
           <div className="mt-[82px] border-t border-white/10 pt-[11px]">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-[506px_1034px] md:items-center">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_420px_420px] md:items-center">
               <p className="text-[14px] text-white/50">© ГК РАСЦВЕТ, 2026</p>
 
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-[375px_508px] md:gap-x-[151px]">
+              <a
+                href="#"
+                className="text-[14px] text-white/50 transition hover:text-white/80"
+              >
+                Согласие на получение рекламных рассылок
+              </a>
+
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                 <a
                   href="#"
                   className="text-[14px] text-white/50 transition hover:text-white/80"
                 >
-                  Согласие на получение рекламных рассылок
+                  Политика конфиденциальности
                 </a>
-
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <a
-                    href="#"
-                    className="text-[14px] text-white/50 transition hover:text-white/80"
-                  >
-                    Политика конфиденциальности
-                  </a>
-                  <a
-                    href="#"
-                    className="text-[14px] text-white/50 transition hover:text-white/80"
-                  >
-                    Сделано в SKY NEEX
-                  </a>
-                </div>
+                <a
+                  href="#"
+                  className="text-[14px] text-white/50 transition hover:text-white/80"
+                >
+                  Сделано в SKY NEEX
+                </a>
               </div>
             </div>
           </div>
