@@ -118,8 +118,8 @@ export default function Footer() {
           </div>
 
           <div className="pt-[140px]">
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-[280px_420px_420px_1fr] md:items-start">
-              <div>
+            <div className="relative hidden min-h-[250px] md:block">
+              <div className="absolute left-0 top-0 w-[320px]">
                 <p className="mb-[158px] text-[32px] leading-[1.2] tracking-[-0.02em] text-white/90">
                   Калининград,
                   <br />
@@ -142,7 +142,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="space-y-[56px]">
+              <div className="absolute left-[550px] top-0 space-y-[56px]">
                 <div>
                   <p className="mb-2 text-[21px] leading-none text-white/50">
                     Офис
@@ -166,7 +166,7 @@ export default function Footer() {
                 </div>
               </div>
 
-              <div className="space-y-[56px]">
+              <div className="absolute left-[1075px] top-0 space-y-[56px]">
                 <div>
                   <p className="mb-2 text-[21px] leading-none text-white/50">
                     Телефон
@@ -188,32 +188,124 @@ export default function Footer() {
                   </p>
                 </div>
               </div>
+            </div>
 
-              <div />
+            <div className="space-y-10 md:hidden">
+              <div>
+                <p className="text-[32px] leading-[1.2] tracking-[-0.02em] text-white/90">
+                  Калининград,
+                  <br />
+                  ул. Костромская, 10
+                </p>
+              </div>
+
+              <div className="flex items-center gap-4 text-[16px] text-white/80">
+                <a href="#" className="transition hover:text-white">
+                  Telegram
+                </a>
+                <a href="#" className="transition hover:text-white">
+                  VK
+                </a>
+                <a href="#" className="transition hover:text-white">
+                  YouTube
+                </a>
+                <a href="#" className="transition hover:text-white">
+                  Rutube
+                </a>
+              </div>
+
+              <div className="space-y-[40px]">
+                <div>
+                  <p className="mb-2 text-[21px] leading-none text-white/50">
+                    Офис
+                  </p>
+                  <p className="text-[21px] leading-[1.35] text-white/90">
+                    Пн–Пт: 10:00 — 20:00,
+                    <br />
+                    Сб–Вс: 10:00 — 18:00
+                  </p>
+                </div>
+
+                <div>
+                  <p className="mb-2 text-[21px] leading-none text-white/50">
+                    Телефон
+                  </p>
+                  <a
+                    href="tel:+74012994222"
+                    className="text-[21px] leading-[1.35] text-white/90"
+                  >
+                    + 7 4012 994 222
+                  </a>
+                </div>
+
+                <div>
+                  <p className="mb-2 text-[21px] leading-none text-white/50">
+                    Отдел продаж
+                  </p>
+                  <p className="text-[21px] leading-[1.35] text-white/90">
+                    Пн–Пт: 09:00 — 19:00,
+                    <br />
+                    Сб–Вс: 10:00 — 18:00
+                  </p>
+                </div>
+
+                <div>
+                  <p className="mb-2 text-[21px] leading-none text-white/50">
+                    Звонки принимаются
+                  </p>
+                  <p className="text-[21px] leading-[1.35] text-white/90">
+                    с 10:00 до 20:00 (Мск)
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="mt-[82px] border-t border-white/10 pt-[11px]">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_420px_420px_1fr] md:items-center">
-              <p className="text-[14px] text-white/50">© ГК РАСЦВЕТ, 2026</p>
+            <div className="relative hidden h-[32px] md:block">
+              <p className="absolute left-0 top-0 text-[14px] text-white/50">
+                © ГК РАСЦВЕТ, 2026
+              </p>
 
               <a
                 href="#"
-                className="text-[14px] text-white/50 transition hover:text-white/80"
+                className="absolute left-[550px] top-0 text-[14px] text-white/50 transition hover:text-white/80"
               >
                 Согласие на получение рекламных рассылок
               </a>
 
               <a
                 href="#"
-                className="text-[14px] text-white/50 transition hover:text-white/80"
+                className="absolute left-[1075px] top-0 text-[14px] text-white/50 transition hover:text-white/80"
               >
                 Политика конфиденциальности
               </a>
 
               <a
                 href="#"
-                className="text-[14px] text-white/50 transition hover:text-white/80 md:justify-self-end"
+                className="absolute right-0 top-0 text-[14px] text-white/50 transition hover:text-white/80"
+              >
+                Сделано в SKY NEEX
+              </a>
+            </div>
+
+            <div className="space-y-3 md:hidden">
+              <p className="text-[14px] text-white/50">© ГК РАСЦВЕТ, 2026</p>
+              <a
+                href="#"
+                className="block text-[14px] text-white/50 transition hover:text-white/80"
+              >
+                Согласие на получение рекламных рассылок
+              </a>
+              <a
+                href="#"
+                className="block text-[14px] text-white/50 transition hover:text-white/80"
+              >
+                Политика конфиденциальности
+              </a>
+              <a
+                href="#"
+                className="block text-[14px] text-white/50 transition hover:text-white/80"
               >
                 Сделано в SKY NEEX
               </a>
