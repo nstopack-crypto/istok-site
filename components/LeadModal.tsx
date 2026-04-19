@@ -118,12 +118,12 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
         ) : (
           <div className="py-10">
             <h3 className="mb-4 text-[32px] font-medium leading-[1.05] tracking-[-0.03em] text-[#1e1e1e] md:text-[40px]">
-              Спасибо
+              Спасибо за интерес к проекту
             </h3>
 
             <p className="mb-8 max-w-[420px] text-[16px] leading-[1.5] tracking-[-0.02em] text-[#1e1e1e]">
-              Форма пока работает в демонстрационном режиме. Следующим шагом
-              подключим реальную отправку заявок.
+              Мы получили вашу заявку. Наш менеджер свяжется с вами, чтобы
+              рассказать о проекте, доступных планировках и способах покупки.
             </p>
 
             <button
@@ -135,7 +135,7 @@ export default function LeadModal({ isOpen, onClose }: LeadModalProps) {
               }}
               className="h-[52px] bg-[#1f1f1a] px-5 text-[12px] font-semibold uppercase text-white transition hover:opacity-90"
             >
-              Закрыть
+              Понятно
             </button>
           </div>
         )}
