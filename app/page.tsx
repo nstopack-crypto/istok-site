@@ -8,6 +8,7 @@ import Masterplan from "../components/Masterplan";
 import Infrastructure from "../components/Infrastructure";
 import Architecture from "../components/Architecture";
 import Location from "../components/Location";
+import MapSection from "../components/MapSection";
 import DesignerApproved from "../components/DesignerApproved";
 import Layouts from "../components/Layouts";
 import Landscaping from "../components/Landscaping";
@@ -31,6 +32,7 @@ export default function HomePage() {
       <Infrastructure />
       <Architecture />
       <Location />
+      <MapSection />
       <DesignerApproved />
       <Layouts />
       <Landscaping />
