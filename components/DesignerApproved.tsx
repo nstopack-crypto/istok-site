@@ -33,8 +33,8 @@ export default function DesignerApproved() {
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
 
-      const start = viewportHeight;
-      const end = -rect.height * 0.35;
+      const start = viewportHeight * 0.95;
+      const end = -rect.height * 0.15;
       const current = rect.top;
 
       const raw = (start - current) / (start - end);
@@ -53,15 +53,15 @@ export default function DesignerApproved() {
     };
   }, []);
 
-  const topRowY = 60 - progress * 60;
-  const bottomRowY = 110 - progress * 110;
+  const topRowY = 90 - progress * 120;
+  const bottomRowY = 160 - progress * 180;
 
   return (
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-[#efebe4]"
     >
-      <div className="relative h-[732px] w-full">
+      <div className="relative h-screen min-h-[732px] w-full">
         <div className="absolute inset-0">
           <Image
             src="/images/designer-bg.jpg"
@@ -72,13 +72,13 @@ export default function DesignerApproved() {
           />
         </div>
 
-        <div className="absolute inset-0 bg-[rgba(0,0,0,0.06)]" />
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.08)]" />
 
         <div className="relative z-10 h-full px-[20px]">
           <div className="mx-auto h-full max-w-[1600px]">
-            <div className="grid h-full grid-cols-1 md:grid-cols-[412px_1fr] md:gap-[62px]">
-              <div className="flex items-end pb-[92px]">
-                <h2 className="max-w-[360px] text-[48px] font-medium leading-[0.98] tracking-[-0.04em] text-white md:text-[64px]">
+            <div className="grid h-full grid-cols-1 md:grid-cols-[380px_1fr] md:gap-[92px]">
+              <div className="flex items-end pb-[64px] md:pb-[78px]">
+                <h2 className="max-w-[340px] text-[48px] font-medium leading-[0.98] tracking-[-0.04em] text-white md:text-[64px]">
                   Одобрено
                   <br />
                   дизайнерами
@@ -87,13 +87,13 @@ export default function DesignerApproved() {
 
               <div className="relative hidden md:block">
                 <div
-                  className="absolute left-0 top-[140px] grid w-full grid-cols-2 gap-5 transition-transform duration-150 ease-out"
+                  className="absolute left-0 top-[120px] grid w-full grid-cols-2 gap-5 will-change-transform"
                   style={{ transform: `translateY(${topRowY}px)` }}
                 >
                   {cards.slice(0, 2).map((card, index) => (
                     <article
                       key={index}
-                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px]"
+                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
                     >
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
 
@@ -113,13 +113,13 @@ export default function DesignerApproved() {
                 </div>
 
                 <div
-                  className="absolute left-0 top-[470px] grid w-full grid-cols-2 gap-5 transition-transform duration-150 ease-out"
+                  className="absolute left-0 top-[455px] grid w-full grid-cols-2 gap-5 will-change-transform"
                   style={{ transform: `translateY(${bottomRowY}px)` }}
                 >
                   {cards.slice(2, 4).map((card, index) => (
                     <article
                       key={index}
-                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[22px]"
+                      className="relative h-[315px] overflow-hidden bg-[rgba(223,223,223,0.28)] backdrop-blur-[24px]"
                     >
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.02))]" />
 
