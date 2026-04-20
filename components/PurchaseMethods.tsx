@@ -1,5 +1,9 @@
 "use client";
 
+type PurchaseMethodsProps = {
+  onOpenLead?: () => void;
+};
+
 const items = [
   {
     title: "Ипотека от 4,5%",
@@ -39,7 +43,9 @@ function Arrow() {
   );
 }
 
-export default function PurchaseMethods() {
+export default function PurchaseMethods({
+  onOpenLead,
+}: PurchaseMethodsProps) {
   return (
     <section className="bg-[#F6F6F2] pt-[20px]">
       <div className="px-[20px]">
@@ -54,12 +60,13 @@ export default function PurchaseMethods() {
               заявку, чтобы получить персональное предложение и консультацию.
             </p>
 
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={onOpenLead}
               className="mt-[30px] inline-block text-[14px] uppercase tracking-[0.04em] text-[#1F1F1A] underline underline-offset-[6px] decoration-[#CFCFBF]"
             >
               Оставить заявку
-            </a>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2">
