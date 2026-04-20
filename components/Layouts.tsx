@@ -182,11 +182,11 @@ export default function PlanningSolutionsSection() {
   }, [activeType]);
 
   return (
-    <section className="bg-[#f3f3ef] py-[56px] md:py-[72px]">
+    <section className="bg-white py-[56px] md:py-[42px]">
       <div className="w-full px-[20px]">
         <div className="w-full">
-          <div className="mb-[110px] max-w-[430px]">
-            <h2 className="text-[18px] font-[500] leading-[1.2] tracking-[-0.02em] text-[#20201c] md:text-[22px] lg:text-[24px]">
+          <div className="mb-[110px] max-w-[420px]">
+            <h2 className="text-[18px] font-[500] leading-[1.2] tracking-[-0.02em] text-[#20201c] md:text-[22px] lg:text-[22px]">
               В проекте представлено более 70 планировочных решений,
               рассчитанных на разные сценарии жизни.
             </h2>
