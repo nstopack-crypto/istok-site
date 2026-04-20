@@ -24,7 +24,7 @@ export default function Intro() {
     <section className="bg-white pt-[20px]">
       <div className="w-full px-[20px]">
         <div className="max-w-[980px]">
-          <h2 className="text-[38px] font-medium leading-[0.98] tracking-[-0.05em] text-[#1F1F1A] md:text-[64px]">
+          <h2 className="text-[40px] font-medium leading-[1.02] tracking-[-0.05em] text-[#1F1F1A] md:text-[58px]">
             Здесь соединяются тишина загородной жизни, современная архитектура
             и продуманная среда — пространство, где можно замедлиться,
             выдохнуть, проводить больше времени с семьёй и чувствовать
@@ -32,8 +32,8 @@ export default function Intro() {
           </h2>
         </div>
 
-        <div className="mt-[140px] md:mt-[170px]">
-          <p className="mb-[10px] text-[18px] font-medium leading-[1.1] tracking-[-0.02em] text-[#9B9B9B]">
+        <div className="mt-[150px] md:mt-[175px]">
+          <p className="mb-[10px] text-[16px] font-medium leading-[1.1] tracking-[-0.02em] text-[#9B9B9B]">
             Преимущества проекта
           </p>
 
@@ -41,16 +41,16 @@ export default function Intro() {
             {advantages.map((item) => (
               <div
                 key={item.title}
-                className="grid grid-cols-1 gap-x-[20px] border-t border-[#E5E1DA] py-[18px] md:grid-cols-[1fr_1fr] md:gap-x-[20px]"
+                className="grid grid-cols-1 gap-x-[20px] border-t border-[#E5E1DA] py-[18px] md:grid-cols-[520px_1fr]"
               >
                 <div>
-                  <h3 className="max-w-[700px] text-[28px] font-medium leading-[1.05] tracking-[-0.04em] text-[#1F1F1A] md:text-[32px]">
+                  <h3 className="text-[32px] font-medium leading-[1.06] tracking-[-0.04em] text-[#1F1F1A]">
                     {item.title}
                   </h3>
                 </div>
 
                 <div>
-                  <p className="max-w-[700px] text-[18px] leading-[1.32] tracking-[-0.02em] text-[#1F1F1A]">
+                  <p className="max-w-[720px] text-[18px] leading-[1.38] tracking-[-0.02em] text-[#1F1F1A]">
                     {item.text}
                   </p>
                 </div>
