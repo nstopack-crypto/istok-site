@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Hero from "../components/Hero";
 import Intro from "../components/Intro";
-import Advantages from "../components/Advantages";
 import Masterplan from "../components/Masterplan";
 import Infrastructure from "../components/Infrastructure";
 import Architecture from "../components/Architecture";
@@ -27,7 +26,6 @@ export default function HomePage() {
     <main id="top" className="min-h-screen bg-[#f5f3ee] text-[#1f1f1a]">
       <Hero />
       <Intro />
-      <Advantages />
       <Masterplan />
       <Infrastructure />
       <Architecture />

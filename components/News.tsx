@@ -149,7 +149,7 @@ export default function News() {
           </div>
         </div>
 
-        <div className="h-[340px]" />
+        <div className="h-[200px]" />
       </div>
 
       <style jsx>{`

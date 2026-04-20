@@ -23,7 +23,7 @@ export default function Intro() {
   return (
     <section className="bg-white pt-[20px]">
       <div className="w-full px-[20px]">
-        <div className="max-w-[980px]">
+        <div className="max-w-[1180px]">
           <h2 className="text-[40px] font-medium leading-[1.02] tracking-[-0.05em] text-[#1F1F1A] md:text-[58px]">
             Здесь соединяются тишина загородной жизни, современная архитектура
             и продуманная среда — пространство, где можно замедлиться,
@@ -33,33 +33,35 @@ export default function Intro() {
         </div>
 
         <div className="mt-[150px] md:mt-[175px]">
-          <p className="mb-[10px] text-[16px] font-medium leading-[1.1] tracking-[-0.02em] text-[#9B9B9B]">
-            Преимущества проекта
-          </p>
+          <div className="ml-[547px] max-w-[1053px]">
+            <p className="mb-[10px] text-[16px] font-medium leading-[1.1] tracking-[-0.02em] text-[#9B9B9B]">
+              Преимущества проекта
+            </p>
 
-          <div className="flex flex-col">
-            {advantages.map((item) => (
-              <div
-                key={item.title}
-                className="grid grid-cols-1 gap-x-[20px] border-t border-[#E5E1DA] py-[18px] md:grid-cols-[520px_1fr]"
-              >
-                <div>
-                  <h3 className="text-[32px] font-medium leading-[1.06] tracking-[-0.04em] text-[#1F1F1A]">
-                    {item.title}
-                  </h3>
-                </div>
+            <div className="flex flex-col">
+              {advantages.map((item) => (
+                <div
+                  key={item.title}
+                  className="grid grid-cols-[516px_1fr] gap-x-[20px] border-t border-[#E5E1DA] py-[18px]"
+                >
+                  <div>
+                    <h3 className="text-[26px] font-medium leading-[1.06] tracking-[-0.04em] text-[#1F1F1A]">
+                      {item.title}
+                    </h3>
+                  </div>
 
-                <div>
-                  <p className="max-w-[720px] text-[18px] leading-[1.38] tracking-[-0.02em] text-[#1F1F1A]">
-                    {item.text}
-                  </p>
+                  <div>
+                    <p className="max-w-[517px] text-[18px] leading-[1.38] tracking-[-0.02em] text-[#1F1F1A]">
+                      {item.text}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="h-[340px]" />
+        <div className="h-[160px]" />
       </div>
     </section>
   );

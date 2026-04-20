@@ -211,7 +211,7 @@ export default function Lifestyle() {
           ))}
         </div>
 
-        <div className="h-[340px]" />
+        <div className="h-[180px]" />
       </div>
     </section>
   );

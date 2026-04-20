@@ -1,79 +1,90 @@
-type PurchaseMethodsProps = {
-  onOpenLead: () => void;
-};
+"use client";
 
-const methods = [
+const items = [
   {
-    title: "Ипотека",
-    text: "Подберём оптимальную ипотечную программу и поможем пройти путь от заявки до одобрения.",
+    title: "Ипотека от 4,5%",
+    text: "Семейная, IT, комбо, военная и рыночная 13,9%",
   },
   {
-    title: "Рассрочка",
-    text: "Гибкие условия покупки для тех, кто хочет сохранить финансовую свободу на этапе строительства.",
+    title: "Рассрочка 0%",
+    text: "Рассрочка до конца июня 2026 года без удорожания",
+  },
+  {
+    title: "Трейд-ин",
+    text: "Обменяйте старую квартиру на новую с выгодой и комфортом",
   },
   {
     title: "100% оплата",
-    text: "Простая и прозрачная схема покупки с возможностью получить индивидуальные условия.",
-  },
-  {
-    title: "Семейные сценарии покупки",
-    text: "Подберём решение для обмена, расширения или покупки квартиры для нескольких поколений семьи.",
+    text: "Без переплат, ускоренное оформление и лучшие условия покупки",
   },
 ];
 
-export default function PurchaseMethods({
-  onOpenLead,
-}: PurchaseMethodsProps) {
+function Arrow() {
   return (
-    <section
-      id="purchase"
-      className="bg-[#f5f3ee] py-16 md:py-24"
-    >
-      <div className="mx-auto max-w-[1600px] px-5">
-        <div className="mb-12 md:mb-16">
-          <h2 className="mb-6 text-[40px] font-medium leading-[1.02] tracking-[-0.04em] text-[#1e1e1e] md:text-[80px]">
-            Способы покупки
-          </h2>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path
+        d="M4 9H14"
+        stroke="white"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10 5L14 9L10 13"
+        stroke="white"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
-          <p className="max-w-[375px] text-[20px] font-medium leading-[1.3] tracking-[-0.02em] text-[#1e1e1e]">
-            Подберём наиболее выгодные условия покупки квартиры. Заполните
-            заявку, чтобы получить персональное предложение и консультацию.
-          </p>
-        </div>
+export default function PurchaseMethods() {
+  return (
+    <section className="bg-[#F6F6F2] pt-[20px]">
+      <div className="px-[20px]">
+        <h2 className="text-[56px] leading-[0.9] tracking-[-0.05em] text-[#1F1F1A] md:text-[88px]">
+          Способы покупки
+        </h2>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[375px_1fr] md:gap-[151px]">
+        <div className="mt-[120px] grid grid-cols-1 gap-[40px] md:grid-cols-[420px_1fr]">
           <div>
-            <button
-              type="button"
-              onClick={onOpenLead}
-              className="border-b-2 border-[#dadfc5] pb-1 text-[12px] font-semibold uppercase leading-[1.15] text-[#1e1e1e] transition hover:opacity-70"
+            <p className="text-[18px] font-medium leading-[1.35] text-[#1F1F1A]">
+              Подберём наиболее выгодные условия покупки квартиры. Заполните
+              заявку, чтобы получить персональное предложение и консультацию.
+            </p>
+
+            <a
+              href="#"
+              className="mt-[30px] inline-block text-[14px] uppercase tracking-[0.04em] text-[#1F1F1A] underline underline-offset-[6px] decoration-[#CFCFBF]"
             >
-              Получить предложение
-            </button>
+              Оставить заявку
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {methods.map((item, index) => (
-              <article
-                key={item.title}
-                className="min-h-[238px] border border-[#e1e3e3] bg-white p-5"
+          <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2">
+            {items.map((item, i) => (
+              <div
+                key={i}
+                className="group relative h-[240px] border border-[#E3E3DD] bg-[#F6F6F2] p-[20px] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(0,0,0,0.04)]"
               >
-                <div className="mb-10 flex items-start justify-between gap-4">
-                  <h3 className="text-[24px] font-medium leading-[1.2] tracking-[-0.02em] text-[#1e1e1e]">
-                    {item.title}
-                  </h3>
-                  <span className="text-[12px] text-[#8e8e8e]">
-                    0{index + 1}
-                  </span>
-                </div>
+                <h3 className="text-[32px] leading-[1.1] tracking-[-0.03em] text-[#1F1F1A]">
+                  {item.title}
+                </h3>
 
-                <p className="max-w-[420px] text-[16px] leading-[1.5] tracking-[-0.02em] text-[#1e1e1e]">
+                <p className="absolute bottom-[24px] right-[24px] max-w-[240px] text-[14px] leading-[1.35] text-[#1F1F1A]">
                   {item.text}
                 </p>
-              </article>
+
+                <div className="absolute bottom-[24px] left-[24px] flex h-[28px] w-[28px] items-center justify-center rounded-full bg-[#1F1F1A] transition-transform duration-300 group-hover:scale-105">
+                  <Arrow />
+                </div>
+              </div>
             ))}
           </div>
         </div>
+
+        <div className="h-[340px]" />
       </div>
     </section>
   );
