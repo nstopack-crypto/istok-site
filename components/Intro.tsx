@@ -1,18 +1,65 @@
+"use client";
+
+const advantages = [
+  {
+    title: "Малоэтажность и приватность",
+    text: "Камерные дома до 4 этажей формируют спокойную и уютную среду без ощущения плотной городской застройки.",
+  },
+  {
+    title: "Среда для жизни",
+    text: "Дворы без машин, прогулочные маршруты, общественные пространства, места для отдыха, спорта и встреч — всё, что нужно для повседневной жизни рядом с домом.",
+  },
+  {
+    title: "Продуманные планировки",
+    text: "Квартиры под разные сценарии жизни: кухни-гостиные, мастер-спальни, гардеробные, террасы, квартиры с видом на природу.",
+  },
+  {
+    title: "Природа рядом",
+    text: "Лес, тишина, чистый воздух и близость к морю — редкое сочетание, которое позволяет жить в спокойствии, не отказываясь от городской инфраструктуры.",
+  },
+];
+
 export default function Intro() {
   return (
-    <section id="about" className="bg-[#f5f3ee]">
-      <div className="mx-auto max-w-[1600px] px-5 py-16 md:py-24">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_2fr]">
-          <div />
-          <div>
-            <p className="max-w-[1030px] text-2xl leading-[1.35] md:text-[56px] md:leading-[1.15]">
-              Здесь соединяются тишина загородной жизни, современная архитектура
-              и продуманная среда — пространство, где можно замедлиться,
-              выдохнуть, проводить больше времени с семьёй и чувствовать
-              настоящий ритм жизни.
-            </p>
+    <section className="bg-white pt-[20px]">
+      <div className="w-full px-[20px]">
+        <div className="max-w-[980px]">
+          <h2 className="text-[38px] font-medium leading-[0.98] tracking-[-0.05em] text-[#1F1F1A] md:text-[64px]">
+            Здесь соединяются тишина загородной жизни, современная архитектура
+            и продуманная среда — пространство, где можно замедлиться,
+            выдохнуть, проводить больше времени с семьёй и чувствовать
+            настоящий ритм жизни.
+          </h2>
+        </div>
+
+        <div className="mt-[140px] md:mt-[170px]">
+          <p className="mb-[10px] text-[18px] font-medium leading-[1.1] tracking-[-0.02em] text-[#9B9B9B]">
+            Преимущества проекта
+          </p>
+
+          <div className="flex flex-col">
+            {advantages.map((item) => (
+              <div
+                key={item.title}
+                className="grid grid-cols-1 gap-x-[20px] border-t border-[#E5E1DA] py-[18px] md:grid-cols-[1fr_1fr] md:gap-x-[20px]"
+              >
+                <div>
+                  <h3 className="max-w-[700px] text-[28px] font-medium leading-[1.05] tracking-[-0.04em] text-[#1F1F1A] md:text-[32px]">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <div>
+                  <p className="max-w-[700px] text-[18px] leading-[1.32] tracking-[-0.02em] text-[#1F1F1A]">
+                    {item.text}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
+        <div className="h-[340px]" />
       </div>
     </section>
   );
